@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.networkmonitor.controller.DashboardController" alignment="CENTER_LEFT" spacing="20" styleClass="dashboard">
+    <!-- Dashboard Header -->
+    <Label text="Dashboard" styleClass="dashboard-title" />
+
+    <!-- Key Metrics -->
+    <HBox spacing="20" styleClass="metrics-container">
+        <VBox styleClass="metric-box">
+            <Label text="Active Devices" styleClass="metric-label" />
+            <Label fx:id="lblActiveDevices" text="0" styleClass="metric-value" />
+        </VBox>
+        <VBox styleClass="metric-box">
+            <Label text="Critical Alerts" styleClass="metric-label" />
+            <Label fx:id="lblCriticalAlerts" text="0" styleClass="metric-value" />
+        </VBox>
+        <VBox styleClass="metric-box">
+            <Label text="Vulnerabilities" styleClass="metric-label" />
+            <Label fx:id="lblVulnerabilities" text="0" styleClass="metric-value" />
+        </VBox>
+    </HBox>
+
+    <!-- Recent Alerts -->
+    <VBox spacing="10" styleClass="recent-alerts">
+        <Label text="Recent Alerts" styleClass="section-title" />
+        <TableView fx:id="tblRecentAlerts" styleClass="alert-table">
+            <columns>
+                <TableColumn fx:id="colType" text="Type" prefWidth="250" styleClass="column-header"/>
+                <TableColumn fx:id="colSeverity" text="Severity" prefWidth="250" styleClass="column-header"/>
+                <TableColumn fx:id="colTimestamp" text="Timestamp" prefWidth="250" styleClass="column-header"/>
+            </columns>
+            <columnResizePolicy>
+                <TableView fx:constant="CONSTRAINED_RESIZE_POLICY"/>
+            </columnResizePolicy>
+        </TableView>
+    </VBox>
+</VBox>

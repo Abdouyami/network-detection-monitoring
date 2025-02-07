@@ -11,7 +11,7 @@ import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
-public class MainApp extends Application {
+public class Main extends Application {
     @Override
     @SuppressWarnings("CallToPrintStackTrace")
     public void start(Stage primaryStage) {
@@ -22,6 +22,12 @@ public class MainApp extends Application {
             scene.getStylesheets().add(getClass().getResource("/common.css").toExternalForm());
             scene.getStylesheets().add(getClass().getResource("/login.css").toExternalForm());
             scene.getStylesheets().add(getClass().getResource("/main.css").toExternalForm());
+            scene.getStylesheets().add(getClass().getResource("/alert.css").toExternalForm());
+            scene.getStylesheets().add(getClass().getResource("/dashboard.css").toExternalForm());
+            scene.getStylesheets().add(getClass().getResource("/traffic.css").toExternalForm());
+            scene.getStylesheets().add(getClass().getResource("/user.css").toExternalForm());
+            scene.getStylesheets().add(getClass().getResource("/vulnerability.css").toExternalForm());
+            scene.getStylesheets().add(getClass().getResource("/device.css").toExternalForm());
 
             primaryStage.setScene(scene);
             primaryStage.setTitle("Network Admin Login");

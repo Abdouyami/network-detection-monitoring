@@ -5,49 +5,92 @@ import com.networkmonitor.model.Device;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 
 public class DeviceController {
-    @FXML private TableView<Device> deviceTable;
-    @FXML private TableColumn<Device, String> ipColumn;
-    @FXML private TableColumn<Device, String> macColumn;
-    @FXML private TableColumn<Device, String> statusColumn;
+    @FXML
+    private TextField txtSearch;
 
-    private final ObservableList<Device> deviceList = FXCollections.observableArrayList();
+    @FXML
+    private TableView<Device> tblDevices;
+
+    @FXML
+    private TableColumn<Device, String> colIpAddress;
+
+    @FXML
+    private TableColumn<Device, String> colMacAddress;
+
+    @FXML
+    private TableColumn<Device, String> colHostname;
+
+    @FXML
+    private TableColumn<Device, String> colStatus;
+
+    private ObservableList<Device> devices;
 
     @FXML
     public void initialize() {
-        ipColumn.setCellValueFactory(cellData -> cellData.getValue().ipProperty());
-        macColumn.setCellValueFactory(cellData -> cellData.getValue().macProperty());
-        statusColumn.setCellValueFactory(cellData -> cellData.getValue().statusProperty());
+        // Set up table columns
+        colIpAddress.setCellValueFactory(cellData -> cellData.getValue().ipAddressProperty());
+        colMacAddress.setCellValueFactory(cellData -> cellData.getValue().macAddressProperty());
+        colHostname.setCellValueFactory(cellData -> cellData.getValue().hostnameProperty());
+        colStatus.setCellValueFactory(cellData -> cellData.getValue().statusProperty());
 
-        deviceTable.setItems(deviceList);
+        // Load example devices
+        loadDevices();
+    }
+
+    private void loadDevices() {
+        // Example devices (replace with real data from services)
+        devices = FXCollections.observableArrayList(
+            new Device("192.168.1.1", "00:1A:2B:3C:4D:5E", "Router", "Active"),
+            new Device("192.168.1.2", "00:1A:2B:3C:4D:5F", "PC-01", "Active"),
+            new Device("192.168.1.3", "00:1A:2B:3C:4D:60", "PC-02", "Inactive"),
+            new Device("192.168.1.4", "00:1A:2B:3C:4D:61", "Printer", "Suspicious")
+        );
+
+        // Populate the table with example devices
+        tblDevices.setItems(devices);
     }
 
     @FXML
-    @SuppressWarnings("unused")
-    private void handleAddDevice() {
-        Alert alert = new Alert(AlertType.INFORMATION);
-        alert.setContentText("Feature to be implemented!");
-        alert.show();
+    private void handleSearch() {
+        String searchText = txtSearch.getText().toLowerCase();
+        ObservableList<Device> filteredDevices = FXCollections.observableArrayList();
+
+        for (Device device : devices) {
+            if (device.getIpAddress().toLowerCase().contains(searchText) ||
+                device.getHostname().toLowerCase().contains(searchText)) {
+                filteredDevices.add(device);
+            }
+        }
+
+        tblDevices.setItems(filteredDevices);
     }
 
     @FXML
-    @SuppressWarnings("unused")
-    private void handleRemoveDevice() {
-        Device selected = deviceTable.getSelectionModel().getSelectedItem();
-        if (selected != null) {
-            deviceList.remove(selected);
+    private void handleRefresh() {
+        txtSearch.clear();
+        loadDevices();
+    }
+
+    @FXML
+    private void handleIsolateDevice() {
+        Device selectedDevice = tblDevices.getSelectionModel().getSelectedItem();
+        if (selectedDevice != null) {
+            System.out.println("Isolating device: " + selectedDevice.getIpAddress());
+            // TODO: Implement isolation logic (e.g., block device via SSH or SNMP)
         }
     }
 
     @FXML
-    @SuppressWarnings("unused")
-    private void handleRefresh() {
-        // Placeholder for database integration
-        System.out.println("Refreshing device list...");
+    private void handleViewDetails() {
+        Device selectedDevice = tblDevices.getSelectionModel().getSelectedItem();
+        if (selectedDevice != null) {
+            System.out.println("Viewing details for device: " + selectedDevice.getIpAddress());
+            // TODO: Implement device details view
+        }
     }
 }

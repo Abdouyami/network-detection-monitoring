@@ -1,0 +1,81 @@
+/* Device container */
+.device-container {
+    -fx-padding: 20;
+}
+
+/* Device title */
+.device-title {
+    -fx-font-size: 24px;
+    -fx-text-fill: #FFD700;
+    -fx-font-weight: bold;
+}
+
+/* Search container */
+.search-container {
+    -fx-spacing: 10;
+}
+
+.search-field {
+    -fx-background-color: rgba(255, 255, 255, 0.1);
+    -fx-text-fill: #FFFFFF;
+    -fx-prompt-text-fill: #8892B0;
+    -fx-padding: 10;
+    -fx-background-radius: 8;
+}
+
+.search-button,
+.refresh-button {
+    -fx-background-color: #FFD700;
+    -fx-text-fill: #0A192F;
+    -fx-font-weight: bold;
+    -fx-background-radius: 8;
+    -fx-padding: 10;
+}
+
+.search-button:hover,
+.refresh-button:hover {
+    -fx-background-color: #FFC600;
+}
+
+/* Device table */
+.device-table {
+    -fx-background-color: rgba(13, 28, 48, 0.9);
+    -fx-table-cell-border-color: transparent;
+}
+
+.device-table .column-header {
+    -fx-background-color: rgba(100, 255, 218, 0.1);
+    -fx-text-fill: #64FFDA;
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+}
+
+.device-table .table-row-cell {
+    -fx-background-color: rgba(13, 28, 48, 0.9);
+    -fx-text-fill: #E6F1FF;
+}
+
+.device-table .table-row-cell:odd {
+    -fx-background-color: rgba(13, 28, 48, 0.8);
+}
+
+.device-table .table-row-cell:selected {
+    -fx-background-color: rgba(100, 255, 218, 0.2);
+}
+
+/* Action buttons */
+.action-buttons {
+    -fx-spacing: 10;
+}
+
+.action-button {
+    -fx-background-color: #FFD700;
+    -fx-text-fill: #0A192F;
+    -fx-font-weight: bold;
+    -fx-background-radius: 8;
+    -fx-padding: 10 20;
+}
+
+.action-button:hover {
+    -fx-background-color: #FFC600;
+}

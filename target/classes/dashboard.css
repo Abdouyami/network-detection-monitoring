@@ -1,0 +1,148 @@
+/* Base dashboard layout */
+.dashboard {
+    -fx-padding: 20;
+    -fx-background-color: #0D1C30;
+}
+
+.dashboard-title {
+    -fx-font-size: 24px;
+    -fx-text-fill: #FFD700;
+    -fx-font-weight: bold;
+}
+
+/* Metrics section styling */
+.metrics-container {
+    -fx-padding: 20 0 20 0;
+}
+
+.metric-box {
+    -fx-background-color: rgba(13, 28, 48, 0.9);
+    -fx-padding: 20;
+    -fx-spacing: 10;
+    -fx-background-radius: 8;
+    -fx-min-width: 200;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 10, 0, 0, 0);
+}
+
+.metric-label {
+    -fx-font-size: 16px;
+    -fx-text-fill: #64FFDA;
+}
+
+.metric-value {
+    -fx-font-size: 24px;
+    -fx-text-fill: #FFD700;
+    -fx-font-weight: bold;
+}
+
+/* Recent alerts section */
+.recent-alerts {
+    -fx-padding: 20 0 0 0;
+}
+
+.section-title {
+    -fx-font-size: 18px;
+    -fx-text-fill: #FFD700;
+    -fx-font-weight: bold;
+}
+
+/* Table styling */
+.alert-table {
+    -fx-background-color: rgba(13, 28, 48, 0.9);
+    -fx-table-cell-border-color: transparent;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 10, 0, 0, 0);
+}
+
+/* Header styling */
+.alert-table .column-header-background {
+    -fx-background-color: rgba(100, 255, 218, 0.1);
+}
+
+.alert-table .column-header {
+    -fx-background-color: transparent;
+    -fx-border-width: 0 1 1 0;
+    -fx-border-color: rgba(100, 255, 218, 0.2);
+    -fx-padding: 10 15;
+}
+
+.alert-table .column-header .label {
+    -fx-text-fill: #64FFDA;
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-alignment: CENTER;
+}
+
+/* Row styling */
+.alert-table .table-row-cell {
+    -fx-background-color: rgba(13, 28, 48, 0.9);
+    -fx-border-width: 0;
+}
+
+.alert-table .table-row-cell:odd {
+    -fx-background-color: rgba(13, 28, 48, 0.8);
+}
+
+.alert-table .table-row-cell:selected {
+    -fx-background-color: rgba(100, 255, 218, 0.2);
+}
+
+/* Cell styling */
+.alert-table .table-cell {
+    -fx-border-width: 0;
+    -fx-padding: 10 15;
+    -fx-text-fill: #E6F1FF;
+    -fx-alignment: CENTER;
+}
+
+/* Specific column styling */
+#colType .table-cell {
+    -fx-alignment: CENTER;
+}
+
+#colSeverity .table-cell {
+    -fx-alignment: CENTER;
+}
+
+#colTimestamp .table-cell {
+    -fx-alignment: CENTER;
+}
+
+/* ScrollBar styling */
+.alert-table .scroll-bar:vertical,
+.alert-table .scroll-bar:horizontal {
+    -fx-background-color: transparent;
+}
+
+.alert-table .scroll-bar:vertical .track,
+.alert-table .scroll-bar:horizontal .track {
+    -fx-background-color: rgba(13, 28, 48, 0.9);
+}
+
+.alert-table .scroll-bar:vertical .thumb,
+.alert-table .scroll-bar:horizontal .thumb {
+    -fx-background-color: rgba(100, 255, 218, 0.3);
+}
+
+.alert-table .scroll-bar .increment-button,
+.alert-table .scroll-bar .decrement-button {
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+}
+
+/* Empty table background */
+.alert-table:focused {
+    -fx-background-color: rgba(13, 28, 48, 0.9);
+}
+
+.alert-table .placeholder .label {
+    -fx-text-fill: #64FFDA;
+}
+
+/* Hover effects */
+.metric-box:hover {
+    -fx-effect: dropshadow(gaussian, rgba(100, 255, 218, 0.2), 15, 0, 0, 0);
+}
+
+.alert-table .table-row-cell:hover {
+    -fx-background-color: rgba(100, 255, 218, 0.1);
+}
