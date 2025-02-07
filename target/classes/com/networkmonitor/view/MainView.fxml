@@ -51,6 +51,13 @@
                     </ImageView>
                 </graphic>
             </Button>
+            <Button text="Network Map" fx:id="btnNetworkMap" onAction="#loadNetworkMapView" styleClass="sidebar-button">
+                <graphic>
+                    <ImageView fitWidth="20" fitHeight="20" preserveRatio="true">
+                        <Image url="/images/network-map-icon.png" />
+                    </ImageView>
+                </graphic>
+            </Button>
         </VBox>
     </left>
 

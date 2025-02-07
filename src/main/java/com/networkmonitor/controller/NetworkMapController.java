@@ -79,6 +79,8 @@ public class NetworkMapController {
         }
     }
 
+    
+
     @FXML
     private void handleSearch() {
         // TODO: Implement search functionality

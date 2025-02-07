@@ -11,6 +11,9 @@
 <?import javafx.scene.shape.Circle?>
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Text?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.layout.Pane?>
+
 
 <SplitPane xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.networkmonitor.controller.NetworkMapController" styleClass="network-map-container">
     <!-- Left Sidebar -->
@@ -24,9 +27,9 @@
         <!-- Filters -->
         <VBox spacing="10" styleClass="filters-container">
             <Label text="Filters" styleClass="filters-title" />
-            <CheckBox text="Active Devices" fx:id="chkActive" selected="true" onAction="#handleFilter" />
-            <CheckBox text="Suspicious Devices" fx:id="chkSuspicious" selected="true" onAction="#handleFilter" />
-            <CheckBox text="Inactive Devices" fx:id="chkInactive" selected="true" onAction="#handleFilter" />
+            <CheckBox text="Active Devices" fx:id="chkActive" selected="true" onAction="#handleFilter" styleClass="filter-text"/>
+            <CheckBox text="Suspicious Devices" fx:id="chkSuspicious" selected="true" onAction="#handleFilter" styleClass="filter-text"/>
+            <CheckBox text="Inactive Devices" fx:id="chkInactive" selected="true" onAction="#handleFilter" styleClass="filter-text"/>
         </VBox>
 
         <!-- Actions -->

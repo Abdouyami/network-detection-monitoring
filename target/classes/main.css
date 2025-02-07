@@ -48,6 +48,27 @@
     -fx-text-fill: #FFD700;
 }
 
+/* Network Map Button */
+.sidebar .button.network-map {
+    -fx-background-color: transparent;
+    -fx-text-fill: #64FFDA;
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+    -fx-padding: 15 20 15 20;
+    -fx-alignment: center-left;
+    -fx-cursor: hand;
+    -fx-background-radius: 8;
+}
+
+.sidebar .button.network-map:hover {
+    -fx-background-color: rgba(100, 255, 218, 0.1);
+}
+
+.sidebar .button.network-map.active {
+    -fx-background-color: rgba(100, 255, 218, 0.2);
+    -fx-text-fill: #FFD700;
+}
+
 /* Content area styles */
 .content-area {
     -fx-background-color: #0A192F;

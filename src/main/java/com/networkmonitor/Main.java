@@ -28,6 +28,7 @@ public class Main extends Application {
             scene.getStylesheets().add(getClass().getResource("/user.css").toExternalForm());
             scene.getStylesheets().add(getClass().getResource("/vulnerability.css").toExternalForm());
             scene.getStylesheets().add(getClass().getResource("/device.css").toExternalForm());
+            scene.getStylesheets().add(UIManager.class.getResource("/network-map.css").toExternalForm());
 
             primaryStage.setScene(scene);
             primaryStage.setTitle("Network Admin Login");

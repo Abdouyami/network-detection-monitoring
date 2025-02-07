@@ -26,6 +26,9 @@ public class MainController implements Initializable {
     @FXML
     private Button btnVulnerabilities;
 
+    @FXML
+    private Button btnNetworkMap;
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         // Load Dashboard by default when the app starts
@@ -60,10 +63,18 @@ public class MainController implements Initializable {
         UIManager.loadView(contentArea, "/com/networkmonitor/view/VulnerabilityView.fxml");
     }
 
+    @FXML
+    private void loadNetworkMapView() {
+        resetButtonStyles();
+        btnNetworkMap.getStyleClass().add("active");
+        UIManager.loadView(contentArea, "/com/networkmonitor/view/NetworkMapView.fxml");
+    }
+
     private void resetButtonStyles() {
         btnDashboard.getStyleClass().remove("active");
         btnDevices.getStyleClass().remove("active");
         btnAlerts.getStyleClass().remove("active");
         btnVulnerabilities.getStyleClass().remove("active");
+        btnNetworkMap.getStyleClass().remove("active");
     }
 }
