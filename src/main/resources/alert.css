@@ -1,0 +1,145 @@
+/* Alert container */
+.alert-container {
+    -fx-padding: 20;
+    -fx-background-color: #0D1C30;
+}
+
+/* Alert title */
+.alert-title {
+    -fx-font-size: 24px;
+    -fx-text-fill: #FFD700;
+    -fx-font-weight: bold;
+}
+
+/* Search container */
+.search-container {
+    -fx-spacing: 10;
+    -fx-padding: 10 0;
+}
+
+.search-field {
+    -fx-background-color: rgba(255, 255, 255, 0.1);
+    -fx-text-fill: #FFFFFF;
+    -fx-prompt-text-fill: #8892B0;
+    -fx-padding: 10;
+    -fx-background-radius: 8;
+    -fx-min-width: 300;
+}
+
+.search-button,
+.refresh-button {
+    -fx-background-color: #FFD700;
+    -fx-text-fill: #0A192F;
+    -fx-font-weight: bold;
+    -fx-background-radius: 8;
+    -fx-padding: 10 20;
+}
+
+.search-button:hover,
+.refresh-button:hover {
+    -fx-background-color: #FFC600;
+}
+
+/* Alert table */
+.alert-table {
+    -fx-background-color: rgba(13, 28, 48, 0.9);
+    -fx-table-cell-border-color: transparent;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 10, 0, 0, 0);
+}
+
+/* Header styling */
+.alert-table .column-header-background {
+    -fx-background-color: rgba(100, 255, 218, 0.1);
+}
+
+.alert-table .column-header {
+    -fx-background-color: transparent;
+    -fx-border-width: 0 1 1 0;
+    -fx-border-color: rgba(100, 255, 218, 0.2);
+    -fx-padding: 10 15;
+}
+
+.alert-table .column-header .label {
+    -fx-text-fill: #64FFDA;
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-alignment: CENTER;
+}
+
+/* Row styling */
+.alert-table .table-row-cell {
+    -fx-background-color: rgba(13, 28, 48, 0.9);
+    -fx-border-width: 0;
+}
+
+.alert-table .table-row-cell:odd {
+    -fx-background-color: rgba(13, 28, 48, 0.8);
+}
+
+.alert-table .table-row-cell:selected {
+    -fx-background-color: rgba(100, 255, 218, 0.2);
+}
+
+/* Cell styling */
+.alert-table .table-cell {
+    -fx-border-width: 0;
+    -fx-padding: 10 15;
+    -fx-text-fill: #E6F1FF;
+    -fx-alignment: CENTER;
+}
+
+/* ScrollBar styling */
+.alert-table .scroll-bar:vertical,
+.alert-table .scroll-bar:horizontal {
+    -fx-background-color: transparent;
+}
+
+.alert-table .scroll-bar:vertical .track,
+.alert-table .scroll-bar:horizontal .track {
+    -fx-background-color: rgba(13, 28, 48, 0.9);
+}
+
+.alert-table .scroll-bar:vertical .thumb,
+.alert-table .scroll-bar:horizontal .thumb {
+    -fx-background-color: rgba(100, 255, 218, 0.3);
+}
+
+.alert-table .scroll-bar .increment-button,
+.alert-table .scroll-bar .decrement-button {
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+}
+
+/* Empty table background */
+.alert-table:focused {
+    -fx-background-color: rgba(13, 28, 48, 0.9);
+}
+
+.alert-table .placeholder .label {
+    -fx-text-fill: #64FFDA;
+}
+
+/* Action buttons */
+.action-buttons {
+    -fx-spacing: 10;
+    -fx-padding: 10 0;
+}
+
+.action-button {
+    -fx-background-color: #FFD700;
+    -fx-text-fill: #0A192F;
+    -fx-font-weight: bold;
+    -fx-background-radius: 8;
+    -fx-padding: 10 20;
+    -fx-min-width: 120;
+}
+
+.action-button:hover {
+    -fx-background-color: #FFC600;
+    -fx-effect: dropshadow(gaussian, rgba(255, 215, 0, 0.2), 10, 0, 0, 0);
+}
+
+/* Hover effects */
+.alert-table .table-row-cell:hover {
+    -fx-background-color: rgba(100, 255, 218, 0.1);
+}

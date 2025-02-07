@@ -31,7 +31,7 @@ public class Main extends Application {
 
             primaryStage.setScene(scene);
             primaryStage.setTitle("Network Admin Login");
-            primaryStage.getIcons().add(new Image(getClass().getResourceAsStream("/images/logo.png")));
+            primaryStage.getIcons().add(new Image(getClass().getResourceAsStream("/images/login.png")));
             primaryStage.centerOnScreen(); // Centre la fenêtre à l'écran
             // Prevent window from being maximized
             primaryStage.setResizable(false);

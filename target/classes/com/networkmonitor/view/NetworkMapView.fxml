@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.shape.Circle?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Text?>
+
+<SplitPane xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.networkmonitor.controller.NetworkMapController" styleClass="network-map-container">
+    <!-- Left Sidebar -->
+    <VBox fx:id="sidebar" styleClass="sidebar">
+        <!-- Search Bar -->
+        <HBox spacing="10" styleClass="search-container">
+            <TextField fx:id="txtSearch" promptText="Search by IP or Hostname" styleClass="search-field" />
+            <Button text="Search" onAction="#handleSearch" styleClass="search-button" />
+        </HBox>
+
+        <!-- Filters -->
+        <VBox spacing="10" styleClass="filters-container">
+            <Label text="Filters" styleClass="filters-title" />
+            <CheckBox text="Active Devices" fx:id="chkActive" selected="true" onAction="#handleFilter" />
+            <CheckBox text="Suspicious Devices" fx:id="chkSuspicious" selected="true" onAction="#handleFilter" />
+            <CheckBox text="Inactive Devices" fx:id="chkInactive" selected="true" onAction="#handleFilter" />
+        </VBox>
+
+        <!-- Actions -->
+        <VBox spacing="10" styleClass="actions-container">
+            <Label text="Actions" styleClass="actions-title" />
+            <Button text="Refresh Map" onAction="#handleRefresh" styleClass="action-button" />
+            <Button text="Export Map" onAction="#handleExport" styleClass="action-button" />
+        </VBox>
+
+        <!-- Legend -->
+        <VBox spacing="10" styleClass="legend-container">
+            <Label text="Legend" styleClass="legend-title" />
+            <HBox spacing="10">
+                <Circle radius="8" fill="green" />
+                <Label text="Active" styleClass="legend-label" />
+            </HBox>
+            <HBox spacing="10">
+                <Circle radius="8" fill="red" />
+                <Label text="Suspicious" styleClass="legend-label" />
+            </HBox>
+            <HBox spacing="10">
+                <Circle radius="8" fill="gray" />
+                <Label text="Inactive" styleClass="legend-label" />
+            </HBox>
+        </VBox>
+    </VBox>
+
+    <!-- Main Area -->
+    <StackPane fx:id="mapContainer" styleClass="map-container">
+        <!-- Network Map Canvas -->
+        <Pane fx:id="mapCanvas" styleClass="map-canvas">
+            <!-- Devices and connections will be added dynamically -->
+        </Pane>
+    </StackPane>
+</SplitPane>

@@ -8,6 +8,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.cell.PropertyValueFactory;
 
 public class DeviceController {
     @FXML
@@ -32,11 +33,11 @@ public class DeviceController {
 
     @FXML
     public void initialize() {
-        // Set up table columns
-        colIpAddress.setCellValueFactory(cellData -> cellData.getValue().ipAddressProperty());
-        colMacAddress.setCellValueFactory(cellData -> cellData.getValue().macAddressProperty());
-        colHostname.setCellValueFactory(cellData -> cellData.getValue().hostnameProperty());
-        colStatus.setCellValueFactory(cellData -> cellData.getValue().statusProperty());
+        // Bind columns to Device properties
+        colIpAddress.setCellValueFactory(new PropertyValueFactory<>("ipAddress"));
+        colMacAddress.setCellValueFactory(new PropertyValueFactory<>("macAddress"));
+        colHostname.setCellValueFactory(new PropertyValueFactory<>("hostname"));
+        colStatus.setCellValueFactory(new PropertyValueFactory<>("status"));
 
         // Load example devices
         loadDevices();

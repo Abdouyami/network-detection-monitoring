@@ -26,12 +26,14 @@ public class UIManager {
                 // Add CSS files
                 scene.getStylesheets().add(UIManager.class.getResource("/common.css").toExternalForm());
                 scene.getStylesheets().add(UIManager.class.getResource("/main.css").toExternalForm());
-                scene.getStylesheets().add(UIManager.class.getResource("/alert.css").toExternalForm());
+                scene.getStylesheets().add(UIManager.class.getResource("/device.css").toExternalForm());
                 scene.getStylesheets().add(UIManager.class.getResource("/dashboard.css").toExternalForm());
+                scene.getStylesheets().add(UIManager.class.getResource("/alert.css").toExternalForm());
                 scene.getStylesheets().add(UIManager.class.getResource("/traffic.css").toExternalForm());
                 scene.getStylesheets().add(UIManager.class.getResource("/user.css").toExternalForm());
                 scene.getStylesheets().add(UIManager.class.getResource("/vulnerability.css").toExternalForm());
-                scene.getStylesheets().add(UIManager.class.getResource("/device.css").toExternalForm());
+                scene.getStylesheets().add(UIManager.class.getResource("/network-map.css").toExternalForm());
+                
                 
                 primaryStage.setScene(scene);
                 primaryStage.setTitle("Network Admin Panel");

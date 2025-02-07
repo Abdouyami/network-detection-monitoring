@@ -46,9 +46,9 @@ public class DashboardController {
 
     private void updateDashboardMetrics() {
         // Example data (replace with real data from services)
-        lblActiveDevices.setText("10");
+        lblActiveDevices.setText("2");
         lblCriticalAlerts.setText("3");
-        lblVulnerabilities.setText("5");
+        lblVulnerabilities.setText("3");
     }
 
     private void loadRecentAlerts() {
