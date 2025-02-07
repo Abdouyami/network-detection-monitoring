@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane xmlns:fx="http://javafx.com/fxml" fx:controller="com.networkmonitor.controller.AlertController">
+    <VBox spacing="10" alignment="CENTER" style="-fx-padding: 20;">
+        <Label text="Alert Management" style="-fx-font-size: 20px; -fx-text-fill: #333;"/>
+
+        <TableView fx:id="alertTable">
+            <columns>
+                <TableColumn text="Type" fx:id="typeColumn"/>
+                <TableColumn text="Severity" fx:id="severityColumn"/>
+                <TableColumn text="Description" fx:id="descriptionColumn"/>
+            </columns>
+        </TableView>
+
+        <HBox spacing="10">
+            <Button text="Clear Alert" onAction="#handleClearAlert"/>
+            <Button text="Refresh" onAction="#handleRefreshAlerts"/>
+        </HBox>
+    </VBox>
+</AnchorPane>

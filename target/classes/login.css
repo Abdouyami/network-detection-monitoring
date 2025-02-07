@@ -1,0 +1,95 @@
+/* Root styles */
+.root {
+    -fx-background-color: #0A192F;
+    /* Dark blue background */
+}
+
+/* Login container styles */
+.login-container {
+    -fx-background-color: #0A192F;
+}
+
+.login-form-container {
+    -fx-background-color: rgba(13, 28, 48, 0.9);
+    /* Slightly lighter dark blue with transparency */
+    -fx-padding: 40 80 40 80;
+}
+
+.login-header {
+    -fx-spacing: 10;
+    -fx-padding: 0 0 40 0;
+}
+
+.login-title {
+    -fx-font-family: "System";
+    -fx-font-size: 32px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #FFD700;
+    /* Gold color for main title */
+}
+
+.login-subtitle {
+    -fx-font-family: "System";
+    -fx-font-size: 16px;
+    -fx-text-fill: #E6F1FF;
+    /* Light blue-white for better visibility */
+}
+
+.field-label {
+    -fx-font-family: "System";
+    -fx-font-size: 14px;
+    -fx-text-fill: #64FFDA;
+    /* Bright cyan for field labels */
+}
+
+.login-field {
+    -fx-background-color: rgba(255, 255, 255, 0.1);
+    /* Slight white transparency for fields */
+    -fx-text-fill: #FFFFFF;
+    -fx-prompt-text-fill: #8892B0;
+    /* Muted blue-gray for placeholder */
+    -fx-padding: 12;
+    -fx-background-radius: 8;
+    -fx-border-radius: 8;
+    -fx-font-size: 14px;
+    -fx-min-height: 40px;
+    -fx-border-color: #233554;
+    /* Dark blue border */
+    -fx-border-width: 1;
+}
+
+.login-field:focused {
+    -fx-background-color: rgba(255, 255, 255, 0.15);
+    -fx-border-color: #FFD700;
+    /* Gold border on focus */
+    -fx-border-width: 2;
+}
+
+.login-button {
+    -fx-background-color: #FFD700;
+    /* Gold button */
+    -fx-text-fill: #0A192F;
+    /* Dark blue text */
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-padding: 12;
+    -fx-background-radius: 8;
+    -fx-min-height: 45px;
+    -fx-cursor: hand;
+}
+
+.login-button:hover {
+    -fx-background-color: #FFC600;
+    /* Slightly darker gold on hover */
+    -fx-effect: dropshadow(three-pass-box, rgba(255, 215, 0, 0.4), 10, 0, 0, 0);
+}
+
+.login-image-container {
+    -fx-background-color: #0A192F;
+}
+
+/* Add subtle glow effect to focused elements */
+.login-field:focused,
+.login-button:hover {
+    -fx-effect: dropshadow(three-pass-box, rgba(100, 255, 218, 0.2), 10, 0, 0, 0);
+}

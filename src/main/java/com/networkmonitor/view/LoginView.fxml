@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.text.*?>
+
+<HBox xmlns:fx="http://javafx.com/fxml" fx:controller="com.networkmonitor.controller.LoginController" styleClass="login-container">
+    
+    <!-- Left Side - Login Form -->
+    <VBox styleClass="login-form-container" HBox.hgrow="ALWAYS">
+        <padding>
+            <Insets top="40" right="80" bottom="40" left="80"/>
+        </padding>
+        
+        <VBox styleClass="login-header">
+            <Label text="WELCOME BACK" styleClass="login-title"/>
+            <Label text="Please enter your admin credentials" styleClass="login-subtitle"/>
+        </VBox>
+        
+        <VBox spacing="20" styleClass="login-form">
+            <VBox spacing="8">
+                <Label text="Username" styleClass="field-label"/>
+                <TextField fx:id="usernameField" styleClass="login-field" promptText="Enter your username"/>
+            </VBox>
+            
+            <VBox spacing="8">
+                <Label text="Password" styleClass="field-label"/>
+                <PasswordField fx:id="passwordField" styleClass="login-field" promptText="Enter your password"/>
+            </VBox>
+            
+            <Button text="Login" onAction="#handleLogin" styleClass="login-button"/>
+        </VBox>
+    </VBox>
+    
+    <!-- Right Side - Image -->
+    <StackPane styleClass="login-image-container" HBox.hgrow="ALWAYS">
+        <ImageView fx:id="loginImage" fitWidth="500" fitHeight="600" preserveRatio="true">
+            <Image url="/images/login-image.png"/>
+        </ImageView>
+    </StackPane>
+
+    
+</HBox>
+
+<!-- 
+<StackPane HBox.hgrow="ALWAYS">  
+        <ImageView fx:id="loginImage" preserveRatio="true" fitWidth="0" fitHeight="0">
+            <image>
+                <Image url="/images/login-image.png"/>
+            </image>
+            <StackPane.margin>
+                <Insets/>  
+            </StackPane.margin>
+        </ImageView>
+    </StackPane> -->

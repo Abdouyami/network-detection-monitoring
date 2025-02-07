@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.image.ImageView?>
+
+<BorderPane xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.networkmonitor.controller.MainController" styleClass="main-container">
+    <left>
+        <VBox fx:id="sidebar" spacing="10" styleClass="sidebar">
+            <Button text="Devices" fx:id="btnDevices" onAction="#loadDeviceView" />
+            <Button text="Alerts" fx:id="btnAlerts" onAction="#loadAlertView" />
+        </VBox>
+    </left>
+    <center>
+        <StackPane fx:id="contentArea" styleClass="content-area">
+            <Label text="Welcome to Network Admin Panel" fx:id="lblWelcome" />
+        </StackPane>
+    </center>
+</BorderPane>

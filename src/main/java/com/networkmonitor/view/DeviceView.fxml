@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane xmlns:fx="http://javafx.com/fxml" fx:controller="com.networkmonitor.controller.DeviceController">
+    <VBox spacing="10" alignment="CENTER" style="-fx-padding: 20;">
+        <Label text="Device Management" style="-fx-font-size: 20px; -fx-text-fill: #333;"/>
+
+        <TableView fx:id="deviceTable">
+            <columns>
+                <TableColumn text="IP Address" fx:id="ipColumn"/>
+                <TableColumn text="MAC Address" fx:id="macColumn"/>
+                <TableColumn text="Status" fx:id="statusColumn"/>
+            </columns>
+        </TableView>
+
+        <HBox spacing="10">
+            <Button text="Add Device" onAction="#handleAddDevice"/>
+            <Button text="Remove Device" onAction="#handleRemoveDevice"/>
+            <Button text="Refresh" onAction="#handleRefresh"/>
+        </HBox>
+    </VBox>
+</AnchorPane>
