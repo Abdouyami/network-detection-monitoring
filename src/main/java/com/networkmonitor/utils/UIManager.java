@@ -33,6 +33,7 @@ public class UIManager {
                 scene.getStylesheets().add(UIManager.class.getResource("/user.css").toExternalForm());
                 scene.getStylesheets().add(UIManager.class.getResource("/vulnerability.css").toExternalForm());
                 scene.getStylesheets().add(UIManager.class.getResource("/network-map.css").toExternalForm());
+                scene.getStylesheets().add(UIManager.class.getResource("/notification.css").toExternalForm());
                 
                 
                 primaryStage.setScene(scene);

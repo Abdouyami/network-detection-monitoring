@@ -1,0 +1,140 @@
+/* Root styles */
+.page-title {
+    -fx-font-size: 24px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #FFD700;
+}
+
+/* Filter Section */
+.filter-section {
+    -fx-padding: 10 0 10 0;
+}
+
+.search-field {
+    -fx-pref-width: 300px;
+    -fx-prompt-text-fill: #64FFDA;
+    -fx-background-color: rgba(100, 255, 218, 0.1);
+    -fx-text-fill: #E6F1FF;
+    -fx-border-color: #64FFDA;
+    -fx-border-radius: 5;
+}
+
+.filter-combo {
+    -fx-pref-width: 150px;
+    -fx-background-color: rgba(100, 255, 218, 0.1);
+    -fx-text-fill: #E6F1FF;
+    -fx-border-color: #64FFDA;
+    -fx-border-radius: 5;
+}
+
+.filter-button {
+    -fx-background-color: #64FFDA;
+    -fx-text-fill: #0A192F;
+    -fx-font-weight: bold;
+    -fx-background-radius: 5;
+}
+
+.filter-button:hover {
+    -fx-background-color: rgba(100, 255, 218, 0.8);
+}
+
+/* Notifications Table */
+.notification-table {
+    -fx-background-color: rgba(13, 28, 48, 0.9);
+    -fx-border-color: #233554;
+    -fx-border-width: 1;
+    -fx-border-radius: 5;
+}
+
+.notification-table .column-header-background {
+    -fx-background-color: rgba(100, 255, 218, 0.1);
+}
+
+.notification-table .column-header {
+    -fx-background-color: transparent;
+    -fx-border-width: 0 1 1 0;
+    -fx-border-color: rgba(100, 255, 218, 0.2);
+    -fx-padding: 10 15;
+}
+
+.notification-table.column-header .label {
+    -fx-text-fill: #64FFDA;
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-alignment: CENTER;
+}
+
+/* .notification-table .column-header {
+    -fx-background-color: #233554;
+    -fx-text-fill: #FFD700;
+    -fx-font-weight: bold;
+} */
+
+.notification-table .table-row-cell {
+    -fx-background-color: rgba(13, 28, 48, 0.9);
+    -fx-text-fill: #E6F1FF;
+}
+
+.notification-table .table-row-cell:odd {
+    -fx-background-color: rgba(10, 25, 47, 0.9);
+}
+
+.notification-table .table-row-cell:selected {
+    -fx-background-color: #64FFDA;
+    -fx-text-fill: #0A192F;
+}
+
+/* Cell styling */
+.notification-table .table-cell {
+    -fx-border-width: 0;
+    -fx-padding: 10 15;
+    -fx-text-fill: #E6F1FF;
+    -fx-alignment: CENTER;
+}
+
+/* ScrollBar styling */
+.notification-table .scroll-bar:vertical,
+.notification-table .scroll-bar:horizontal {
+    -fx-background-color: transparent;
+}
+
+.notification-table .scroll-bar:vertical .track,
+.notification-table .scroll-bar:horizontal .track {
+    -fx-background-color: rgba(13, 28, 48, 0.9);
+}
+
+.notification-table .scroll-bar:vertical .thumb,
+.notification-table .scroll-bar:horizontal .thumb {
+    -fx-background-color: rgba(100, 255, 218, 0.3);
+}
+
+.notification-table .scroll-bar .increment-button,
+.notification-table .scroll-bar .decrement-button {
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+}
+
+/* Empty table background */
+.notification-table:focused {
+    -fx-background-color: rgba(13, 28, 48, 0.9);
+}
+
+.notification-table .placeholder .label {
+    -fx-text-fill: #64FFDA;
+}
+
+/* Action Buttons */
+.action-buttons {
+    -fx-padding: 10 0 10 0;
+}
+
+.action-button {
+    -fx-background-color: #64FFDA;
+    -fx-text-fill: #0A192F;
+    -fx-font-weight: bold;
+    -fx-background-radius: 5;
+}
+
+.action-button:hover {
+    -fx-background-color: rgba(100, 255, 218, 0.8);
+}

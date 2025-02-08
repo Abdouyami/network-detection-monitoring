@@ -1,8 +1,79 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.layout.StackPane?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
 
-<StackPane xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.networkmonitor.controller.NotificationsController">
-    <Label text="Notifications Page" style="-fx-font-size: 24px; -fx-text-fill: #FFD700;" />
-</StackPane>
+<VBox xmlns="http://javafx.com/javafx/8" 
+      xmlns:fx="http://javafx.com/fxml/1" 
+      fx:controller="com.networkmonitor.controller.NotificationsController" 
+      stylesheets="@notification.css" 
+      spacing="10" 
+      >
+    <padding>
+        <Insets top="20" right="20" bottom="20" left="20" />
+    </padding>
+
+    <!-- Page Title -->
+    <Label text="Notifications" styleClass="page-title" />
+
+    <!-- Filter Section -->
+    <HBox spacing="10" styleClass="filter-section">
+        <TextField fx:id="txtSearch" 
+                  promptText="Search notifications..." 
+                  styleClass="search-field" 
+                  HBox.hgrow="ALWAYS"/>
+        <ComboBox fx:id="cmbFilter" 
+                  promptText="Filter by status" 
+                  styleClass="filter-combo" />
+        <Button text="Apply Filter" 
+                onAction="#applyFilter" 
+                styleClass="filter-button" />
+    </HBox>
+
+    <!-- Notifications Table -->
+    <TableView fx:id="tblNotifications" 
+               styleClass="notification-table" 
+               VBox.vgrow="ALWAYS">
+        <columns>
+            <TableColumn fx:id="colAlertType" 
+                        text="Alert Type" 
+                        prefWidth="150" 
+                        styleClass="column-header"/>
+            <TableColumn fx:id="colSeverity" 
+                        text="Severity" 
+                        prefWidth="100" 
+                        styleClass="column-header"/>
+            <TableColumn fx:id="colMessage" 
+                        text="Message" 
+                        prefWidth="300" 
+                        styleClass="column-header"/>
+            <TableColumn fx:id="colTimestamp" 
+                        text="Timestamp" 
+                        prefWidth="150" 
+                        styleClass="column-header"/>
+            <TableColumn fx:id="colStatus" 
+                        text="Status" 
+                        prefWidth="100" 
+                        styleClass="column-header"/>
+            <TableColumn fx:id="colRead" 
+                        text="Read" 
+                        prefWidth="80" 
+                        styleClass="column-header"/>
+        </columns>
+
+        <columnResizePolicy>
+            <TableView fx:constant="CONSTRAINED_RESIZE_POLICY"/>
+        </columnResizePolicy>
+    </TableView>
+
+    <!-- Action Buttons -->
+    <HBox spacing="10" styleClass="action-buttons">
+        <Button text="Mark as Read" 
+                onAction="#markAsRead" 
+                styleClass="action-button" />
+        <Button text="Mark as Resolved" 
+                onAction="#markAsResolved" 
+                styleClass="action-button" />
+    </HBox>
+</VBox>
