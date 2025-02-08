@@ -29,6 +29,15 @@ public class MainController implements Initializable {
     @FXML
     private Button btnNetworkMap;
 
+    @FXML
+    private Button btnNotifications;
+
+    @FXML
+    private Button btnLogs;
+
+    @FXML
+    private Button btnSettings;
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         // Load Dashboard by default when the app starts
@@ -69,6 +78,27 @@ public class MainController implements Initializable {
         btnNetworkMap.getStyleClass().add("active");
         UIManager.loadView(contentArea, "/com/networkmonitor/view/NetworkMapView.fxml");
     }
+    
+    @FXML
+    private void loadNotificationsView() {
+        resetButtonStyles();
+        btnNotifications.getStyleClass().add("active");
+        UIManager.loadView(contentArea, "/com/networkmonitor/view/NotificationsView.fxml");
+    }
+
+    @FXML
+    private void loadLogsView() {
+        resetButtonStyles();
+        btnLogs.getStyleClass().add("active");
+        UIManager.loadView(contentArea, "/com/networkmonitor/view/LogsView.fxml");
+    }
+
+    @FXML
+    private void loadSettingsView() {
+        resetButtonStyles();
+        btnSettings.getStyleClass().add("active");
+        UIManager.loadView(contentArea, "/com/networkmonitor/view/SettingsView.fxml");
+    }
 
     private void resetButtonStyles() {
         btnDashboard.getStyleClass().remove("active");
@@ -76,5 +106,8 @@ public class MainController implements Initializable {
         btnAlerts.getStyleClass().remove("active");
         btnVulnerabilities.getStyleClass().remove("active");
         btnNetworkMap.getStyleClass().remove("active");
+        btnNotifications.getStyleClass().remove("active");
+        btnLogs.getStyleClass().remove("active");
+        btnSettings.getStyleClass().remove("active");
     }
 }

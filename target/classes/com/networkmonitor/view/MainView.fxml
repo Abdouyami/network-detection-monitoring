@@ -58,6 +58,27 @@
                     </ImageView>
                 </graphic>
             </Button>
+            <Button text="Notifications" fx:id="btnNotifications" onAction="#loadNotificationsView" styleClass="sidebar-button">
+                <graphic>
+                    <ImageView fitWidth="20" fitHeight="20" preserveRatio="true">
+                        <Image url="/images/notification-icon.png" />
+                    </ImageView>
+                </graphic>
+            </Button>
+            <Button text="Logs" fx:id="btnLogs" onAction="#loadLogsView" styleClass="sidebar-button">
+                <graphic>
+                    <ImageView fitWidth="20" fitHeight="20" preserveRatio="true">
+                        <Image url="/images/logs-icon.png" />
+                    </ImageView>
+                </graphic>
+            </Button>
+            <Button text="Settings" fx:id="btnSettings" onAction="#loadSettingsView" styleClass="sidebar-button">
+                <graphic>
+                    <ImageView fitWidth="20" fitHeight="20" preserveRatio="true">
+                        <Image url="/images/settings-icon.png" />
+                    </ImageView>
+                </graphic>
+            </Button>
         </VBox>
     </left>
 
