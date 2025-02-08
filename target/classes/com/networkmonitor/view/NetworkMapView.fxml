@@ -1,35 +1,33 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.SplitPane?>
-<?import javafx.scene.control.TextField?>
-<?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.VBox?>
-<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
 <?import javafx.scene.shape.Circle?>
-<?import javafx.scene.shape.Line?>
-<?import javafx.scene.text.Text?>
-<?import javafx.scene.control.CheckBox?>
-<?import javafx.scene.layout.Pane?>
 
+<SplitPane xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" 
+    fx:controller="com.networkmonitor.controller.NetworkMapController" 
+    styleClass="network-map-container" dividerPositions="0.25">
 
-<SplitPane xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.networkmonitor.controller.NetworkMapController" styleClass="network-map-container">
     <!-- Left Sidebar -->
     <VBox fx:id="sidebar" styleClass="sidebar">
         <!-- Search Bar -->
         <HBox spacing="10" styleClass="search-container">
-            <TextField fx:id="txtSearch" promptText="Search by IP or Hostname" styleClass="search-field" />
+            <padding><Insets bottom="10"/></padding>
+            <TextField fx:id="txtSearch" promptText="Search by IP or Hostname" 
+                styleClass="search-field" HBox.hgrow="ALWAYS"/>
             <Button text="Search" onAction="#handleSearch" styleClass="search-button" />
         </HBox>
 
         <!-- Filters -->
         <VBox spacing="10" styleClass="filters-container">
             <Label text="Filters" styleClass="filters-title" />
-            <CheckBox text="Active Devices" fx:id="chkActive" selected="true" onAction="#handleFilter" styleClass="filter-text"/>
-            <CheckBox text="Suspicious Devices" fx:id="chkSuspicious" selected="true" onAction="#handleFilter" styleClass="filter-text"/>
-            <CheckBox text="Inactive Devices" fx:id="chkInactive" selected="true" onAction="#handleFilter" styleClass="filter-text"/>
+            <CheckBox text="Active Devices" fx:id="chkActive" selected="true" 
+                onAction="#handleFilter" styleClass="filter-checkbox"/>
+            <CheckBox text="Suspicious Devices" fx:id="chkSuspicious" selected="true" 
+                onAction="#handleFilter" styleClass="filter-checkbox"/>
+            <CheckBox text="Inactive Devices" fx:id="chkInactive" selected="true" 
+                onAction="#handleFilter" styleClass="filter-checkbox"/>
         </VBox>
 
         <!-- Actions -->
@@ -42,26 +40,32 @@
         <!-- Legend -->
         <VBox spacing="10" styleClass="legend-container">
             <Label text="Legend" styleClass="legend-title" />
-            <HBox spacing="10">
-                <Circle radius="8" fill="green" />
-                <Label text="Active" styleClass="legend-label" />
-            </HBox>
-            <HBox spacing="10">
-                <Circle radius="8" fill="red" />
-                <Label text="Suspicious" styleClass="legend-label" />
-            </HBox>
-            <HBox spacing="10">
-                <Circle radius="8" fill="gray" />
-                <Label text="Inactive" styleClass="legend-label" />
-            </HBox>
+            <GridPane hgap="10" vgap="5">
+                <Circle radius="6" fill="green" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+                <Label text="Active" styleClass="legend-label" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+                
+                <Circle radius="6" fill="red" GridPane.columnIndex="0" GridPane.rowIndex="1" />
+                <Label text="Suspicious" styleClass="legend-label" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                
+                <Circle radius="6" fill="gray" GridPane.columnIndex="0" GridPane.rowIndex="2" />
+                <Label text="Inactive" styleClass="legend-label" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+            </GridPane>
         </VBox>
+
+        <VBox VBox.vgrow="ALWAYS" /> <!-- Spacer -->
+
+        <!-- Status Bar -->
+        <HBox styleClass="status-container">
+            <Label fx:id="lblStatus" text="Ready" styleClass="status-label" />
+        </HBox>
     </VBox>
 
     <!-- Main Area -->
     <StackPane fx:id="mapContainer" styleClass="map-container">
-        <!-- Network Map Canvas -->
-        <Pane fx:id="mapCanvas" styleClass="map-canvas">
-            <!-- Devices and connections will be added dynamically -->
-        </Pane>
+        <ScrollPane fx:id="scrollPane" styleClass="map-scroll" 
+            pannable="true" hbarPolicy="ALWAYS" vbarPolicy="ALWAYS">
+            <Pane fx:id="mapCanvas" styleClass="map-canvas" />
+        </ScrollPane>
     </StackPane>
+
 </SplitPane>

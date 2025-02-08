@@ -62,7 +62,7 @@ public class DeviceController {
         ObservableList<Device> filteredDevices = FXCollections.observableArrayList();
 
         for (Device device : devices) {
-            if (device.getIpAddress().toLowerCase().contains(searchText) ||
+            if (device.getIp().toLowerCase().contains(searchText) ||
                 device.getHostname().toLowerCase().contains(searchText)) {
                 filteredDevices.add(device);
             }
@@ -81,7 +81,7 @@ public class DeviceController {
     private void handleIsolateDevice() {
         Device selectedDevice = tblDevices.getSelectionModel().getSelectedItem();
         if (selectedDevice != null) {
-            System.out.println("Isolating device: " + selectedDevice.getIpAddress());
+            System.out.println("Isolating device: " + selectedDevice.getIp());
             // TODO: Implement isolation logic (e.g., block device via SSH or SNMP)
         }
     }
@@ -90,7 +90,7 @@ public class DeviceController {
     private void handleViewDetails() {
         Device selectedDevice = tblDevices.getSelectionModel().getSelectedItem();
         if (selectedDevice != null) {
-            System.out.println("Viewing details for device: " + selectedDevice.getIpAddress());
+            System.out.println("Viewing details for device: " + selectedDevice.getIp());
             // TODO: Implement device details view
         }
     }
