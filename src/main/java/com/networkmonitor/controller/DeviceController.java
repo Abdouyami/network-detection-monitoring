@@ -1,10 +1,13 @@
 package com.networkmonitor.controller;
 
 import com.networkmonitor.model.Device;
+import com.networkmonitor.utils.FakeDataGenerator;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.fxml.FXML;
+import javafx.collections.transformation.FilteredList;
+import javafx.fxml.FXML; // Import FilteredList
+import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
@@ -30,6 +33,7 @@ public class DeviceController {
     private TableColumn<Device, String> colStatus;
 
     private ObservableList<Device> devices;
+    private FilteredList<Device> filteredDevices; // Add FilteredList
 
     @FXML
     public void initialize() {
@@ -39,42 +43,56 @@ public class DeviceController {
         colHostname.setCellValueFactory(new PropertyValueFactory<>("hostname"));
         colStatus.setCellValueFactory(new PropertyValueFactory<>("status"));
 
-        // Load example devices
+        // Set up severity column colors
+        colStatus.setCellFactory(column -> new TableCell<Device, String>() {
+            @Override
+            protected void updateItem(String item, boolean empty) {
+                super.updateItem(item, empty);
+                if (empty || item == null) {
+                    setText(null);
+                    setStyle("");
+                } else {
+                    setText(item);
+                    switch (item.toLowerCase()) {
+                        case "suspicious" -> setStyle("-fx-text-fill: red;");
+                        case "inactive" -> setStyle("-fx-text-fill: orange;");
+                        case "active" -> setStyle("-fx-text-fill: green;");
+                        default -> setStyle("");
+                    }
+                }
+            }
+        });
+
+        // Load fake devices and set up filtering
         loadDevices();
     }
 
     private void loadDevices() {
-        // Example devices (replace with real data from services)
-        devices = FXCollections.observableArrayList(
-            new Device("192.168.1.1", "00:1A:2B:3C:4D:5E", "Router", "Active"),
-            new Device("192.168.1.2", "00:1A:2B:3C:4D:5F", "PC-01", "Active"),
-            new Device("192.168.1.3", "00:1A:2B:3C:4D:60", "PC-02", "Inactive"),
-            new Device("192.168.1.4", "00:1A:2B:3C:4D:61", "Printer", "Suspicious")
-        );
+        // Generate fake devices
+        devices = FXCollections.observableArrayList(FakeDataGenerator.generateDevices(20));
 
-        // Populate the table with example devices
-        tblDevices.setItems(devices);
+        // Initialize FilteredList
+        filteredDevices = new FilteredList<>(devices);
+        tblDevices.setItems(filteredDevices); // Set FilteredList to the table
+
+        // Add listener to the search text field
+        txtSearch.textProperty().addListener((observable, oldValue, newValue) -> {
+            filterDevices(newValue); // Call filter method
+        });
     }
 
-    @FXML
-    private void handleSearch() {
-        String searchText = txtSearch.getText().toLowerCase();
-        ObservableList<Device> filteredDevices = FXCollections.observableArrayList();
-
-        for (Device device : devices) {
-            if (device.getIp().toLowerCase().contains(searchText) ||
-                device.getHostname().toLowerCase().contains(searchText)) {
-                filteredDevices.add(device);
-            }
+    private void filterDevices(String searchText) {
+        if (searchText == null || searchText.isEmpty()) {
+            filteredDevices.setPredicate(device -> true); // Show all devices
+        } else {
+            String lowerCaseSearchText = searchText.toLowerCase();
+            filteredDevices.setPredicate(device ->
+                    device.getIp().toLowerCase().contains(lowerCaseSearchText) ||
+                            device.getHostname().toLowerCase().contains(lowerCaseSearchText) ||
+                            device.getMac().toLowerCase().contains(lowerCaseSearchText) ||
+                            device.getStatus().toLowerCase().contains(lowerCaseSearchText)
+            );
         }
-
-        tblDevices.setItems(filteredDevices);
-    }
-
-    @FXML
-    private void handleRefresh() {
-        txtSearch.clear();
-        loadDevices();
     }
 
     @FXML
@@ -82,7 +100,7 @@ public class DeviceController {
         Device selectedDevice = tblDevices.getSelectionModel().getSelectedItem();
         if (selectedDevice != null) {
             System.out.println("Isolating device: " + selectedDevice.getIp());
-            // TODO: Implement isolation logic (e.g., block device via SSH or SNMP)
+            // TODO: Implement isolation logic
         }
     }
 

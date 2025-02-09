@@ -7,36 +7,23 @@ public class Alert {
     private final StringProperty type;
     private final StringProperty severity;
     private final StringProperty timestamp;
+    private final Device device; // Link to a device
 
-    public Alert(String type, String severity, String timestamp) {
+    public Alert(String type, String severity, String timestamp, Device device) {
         this.type = new SimpleStringProperty(type);
         this.severity = new SimpleStringProperty(severity);
         this.timestamp = new SimpleStringProperty(timestamp);
+        this.device = device;
     }
 
-    // Property methods (required for JavaFX TableView binding)
-    public StringProperty typeProperty() {
-        return type;
-    }
+    // Property getters
+    public StringProperty typeProperty() { return type; }
+    public StringProperty severityProperty() { return severity; }
+    public StringProperty timestampProperty() { return timestamp; }
 
-    public StringProperty severityProperty() {
-        return severity;
-    }
-
-    public StringProperty timestampProperty() {
-        return timestamp;
-    }
-
-    // Regular getters
-    public String getType() {
-        return type.get();
-    }
-
-    public String getSeverity() {
-        return severity.get();
-    }
-
-    public String getTimestamp() {
-        return timestamp.get();
-    }
+    // Value getters
+    public String getType() { return type.get(); }
+    public String getSeverity() { return severity.get(); }
+    public String getTimestamp() { return timestamp.get(); }
+    public Device getDevice() { return device; }
 }

@@ -18,6 +18,14 @@
             <Label fx:id="lblActiveDevices" text="0" styleClass="metric-value" />
         </VBox>
         <VBox styleClass="metric-box">
+            <Label text="Inactive Devices" styleClass="metric-label" />
+            <Label fx:id="lblInActiveDevices" text="0" styleClass="metric-value" />
+        </VBox>
+        <VBox styleClass="metric-box">
+            <Label text="Suspicious Devices" styleClass="metric-label" />
+            <Label fx:id="lblSuspiciousDevices" text="0" styleClass="metric-value" />
+        </VBox>
+        <VBox styleClass="metric-box">
             <Label text="Critical Alerts" styleClass="metric-label" />
             <Label fx:id="lblCriticalAlerts" text="0" styleClass="metric-value" />
         </VBox>

@@ -1,0 +1,61 @@
+.custom-settings-page {
+    /* This applies to the root VBox */
+    -fx-background-color: #1E273B;
+    /* Example: A different background */
+}
+
+.custom-settings-title {
+    /* This applies to the title Label */
+    -fx-text-fill: #A0D2EB;
+    /* Example: A different title color */
+}
+
+.settings-section {
+    /* This applies to the TitledPanes */
+    -fx-border-color: #384259;
+    /* Example: A different border color */
+    -fx-background-color: rgba(30, 39, 59, 0.8);
+    /* Example: A different background */
+    -fx-text-fill: #E6F1FF;
+    /* Light text color */
+}
+
+.settings-section>.title {
+    -fx-text-fill: #66B3FF;
+    /* Example: A different title color */
+}
+
+.settings-grid {
+    /* This applies to the GridPanes inside TitledPanes */
+    -fx-padding: 15;
+    /* Example: More padding */
+}
+
+.settings-label {
+    /* This applies to the Labels */
+    -fx-text-fill: #81D4FA;
+    /* Example: A different label color */
+    -fx-font-weight: bold;
+}
+
+.settings-input {
+    /* This applies to the TextFields and PasswordFields */
+    -fx-background-color: rgba(130, 145, 160, 0.2);
+    /* Example: A different background */
+    -fx-text-fill: #E6F1FF;
+    -fx-border-color: #66B3FF;
+    -fx-prompt-text-fill: #81D4FA;
+}
+
+.settings-buttons {
+    /* This applies to the HBox containing the buttons */
+    -fx-padding: 20 0 0 0;
+    /* Add padding above buttons */
+}
+
+.settings-save-button {
+    /* This applies specifically to the Save button */
+    -fx-background-color: rgba(100, 255, 218, 0.8);
+    /* Example: A green save button */
+    -fx-text-fill: white;
+}

@@ -11,12 +11,36 @@ import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 public class LoginController {
     @FXML private TextField usernameField;
     @FXML private PasswordField passwordField;
+
+    @FXML
+    public void initialize() {
+        // Request focus on the username field initially
+        usernameField.requestFocus();
+
+        // Add event filter to username field for ENTER key press
+        usernameField.addEventFilter(KeyEvent.KEY_PRESSED, event -> {
+            if (event.getCode() == KeyCode.ENTER) {
+                passwordField.requestFocus(); // Move focus to password field
+                event.consume(); // Prevent default behavior (like adding a newline)
+            }
+        });
+
+        // Add event filter to password field for ENTER key press
+        passwordField.addEventFilter(KeyEvent.KEY_PRESSED, event -> {
+            if (event.getCode() == KeyCode.ENTER) {
+                handleLogin(); // Trigger login
+                event.consume();
+            }
+        });
+    }
 
     @FXML
     @SuppressWarnings("unused")

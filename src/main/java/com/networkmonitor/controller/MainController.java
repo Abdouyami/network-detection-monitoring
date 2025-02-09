@@ -3,6 +3,7 @@ package com.networkmonitor.controller;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import com.networkmonitor.service.NotificationService;
 import com.networkmonitor.utils.UIManager;
 
 import javafx.fxml.FXML;
@@ -38,6 +39,9 @@ public class MainController implements Initializable {
     @FXML
     private Button btnSettings;
 
+    private final SettingsController settingsController = new SettingsController();
+    private final NotificationService notificationService = settingsController.getNotificationService();
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         // Load Dashboard by default when the app starts
@@ -62,7 +66,14 @@ public class MainController implements Initializable {
     private void loadAlertView() {
         resetButtonStyles();
         btnAlerts.getStyleClass().add("active");
-        UIManager.loadView(contentArea, "/com/networkmonitor/view/AlertView.fxml");
+        // UIManager.loadView(contentArea, "/com/networkmonitor/view/AlertView.fxml");
+
+        // Load the view and get its controller
+        Object controllerAlert = UIManager.loadView(contentArea, "/com/networkmonitor/view/AlertView.fxml");
+
+        if (controllerAlert instanceof AlertController) {
+            ((AlertController) controllerAlert).setNotificationService(notificationService);
+        }
     }
 
     @FXML

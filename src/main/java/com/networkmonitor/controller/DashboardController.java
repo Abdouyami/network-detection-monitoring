@@ -1,6 +1,11 @@
 package com.networkmonitor.controller;
 
+import java.util.List;
+
 import com.networkmonitor.model.Alert;
+import com.networkmonitor.model.Device;
+import com.networkmonitor.model.Vulnerability;
+import com.networkmonitor.utils.FakeDataGenerator;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -13,6 +18,12 @@ import javafx.scene.control.cell.PropertyValueFactory;
 public class DashboardController {
     @FXML
     private Label lblActiveDevices;
+
+    @FXML
+    private Label lblInActiveDevices;
+
+    @FXML
+    private Label lblSuspiciousDevices;
 
     @FXML
     private Label lblCriticalAlerts;
@@ -32,6 +43,9 @@ public class DashboardController {
     @FXML
     private TableColumn<Alert, String> colTimestamp;
 
+    private ObservableList<Alert> alerts;
+    private ObservableList<Vulnerability> vulnerabilities;
+
     @FXML
     public void initialize() {
         // Set up table columns
@@ -45,19 +59,34 @@ public class DashboardController {
     }
 
     private void updateDashboardMetrics() {
-        // Example data (replace with real data from services)
-        lblActiveDevices.setText("2");
-        lblCriticalAlerts.setText("3");
-        lblVulnerabilities.setText("3");
+        List<Device> fakeDevices = FakeDataGenerator.generateDevices(20);
+        alerts = FXCollections.observableArrayList(FakeDataGenerator.generateAlerts(fakeDevices, 20));
+        vulnerabilities = FXCollections.observableArrayList(FakeDataGenerator.generateVulnerabilities(fakeDevices, 20));
+
+        // Get counts:
+        long activeDeviceCountWithStringStatus = fakeDevices.stream()
+        .filter(device -> "active".equalsIgnoreCase(device.getStatus())) // Case-insensitive comparison
+        .count();
+        long inActiveDeviceCountWithStringStatus = fakeDevices.stream()
+        .filter(device -> "active".equalsIgnoreCase(device.getStatus())) // Case-insensitive comparison
+        .count();
+        long suspiciousDeviceCountWithStringStatus = fakeDevices.stream()
+        .filter(device -> "suspicious".equalsIgnoreCase(device.getStatus())) // Case-insensitive comparison
+        .count();
+        int alertCount = alerts.size();
+        int vulnerabilityCount = vulnerabilities.size();
+
+        lblActiveDevices.setText(String.valueOf(activeDeviceCountWithStringStatus));
+        lblInActiveDevices.setText(String.valueOf(inActiveDeviceCountWithStringStatus));
+        lblSuspiciousDevices.setText(String.valueOf(suspiciousDeviceCountWithStringStatus));
+        lblCriticalAlerts.setText(String.valueOf(alertCount));
+        lblVulnerabilities.setText(String.valueOf(vulnerabilityCount));
     }
 
     private void loadRecentAlerts() {
-        // Example alerts
-        ObservableList<Alert> alerts = FXCollections.observableArrayList(
-            new Alert("DHCP Spoofing", "High", "2025-02-07 14:30:00"),
-            new Alert("Unauthorized Device", "Medium", "2025-02-07 14:35:00"),
-            new Alert("Port Scan Detected", "Low", "2025-02-07 14:40:00")
-        );
+         // Generate fake devices and alerts
+        List<Device> fakeDevices = FakeDataGenerator.generateDevices(10);
+        alerts = FXCollections.observableArrayList(FakeDataGenerator.generateAlerts(fakeDevices, 10));
 
         // Populate the table with example alerts
         tblRecentAlerts.setItems(alerts);

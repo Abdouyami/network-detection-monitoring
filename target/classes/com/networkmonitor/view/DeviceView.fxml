@@ -16,8 +16,6 @@
     <!-- Search and Filter Section -->
     <HBox spacing="10" styleClass="search-container">
         <TextField fx:id="txtSearch" promptText="Search by IP or Hostname" styleClass="search-field" />
-        <Button text="Search" onAction="#handleSearch" styleClass="search-button" />
-        <Button text="Refresh" onAction="#handleRefresh" styleClass="refresh-button" />
     </HBox>
 
     <!-- Device Table -->

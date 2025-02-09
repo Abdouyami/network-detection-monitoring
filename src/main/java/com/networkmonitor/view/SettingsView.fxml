@@ -1,8 +1,58 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.layout.StackPane?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
 
-<StackPane xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.networkmonitor.controller.SettingsController">
-    <Label text="Settings Page" style="-fx-font-size: 24px; -fx-text-fill: #FFD700;" />
-</StackPane>
+<VBox xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.networkmonitor.controller.SettingsController" 
+      spacing="20" styleClass="settings-container, custom-settings-page">
+    <padding><Insets top="20" right="20" bottom="20" left="20"/></padding>
+    <Label text="Settings" styleClass="settings-title, custom-settings-title"/>
+
+    <TitledPane text="Email Notifications" collapsible="false" styleClass="settings-section">
+        <content>
+            <GridPane hgap="10" vgap="5" styleClass="settings-grid">
+                <Label text="SMTP Host:" GridPane.columnIndex="0" GridPane.rowIndex="0" styleClass="settings-label"/>
+                <TextField fx:id="smtpHostField" GridPane.columnIndex="1" GridPane.rowIndex="0" styleClass="settings-input"/>
+
+                <Label text="SMTP Port:" GridPane.columnIndex="0" GridPane.rowIndex="1" styleClass="settings-label"/>
+                <TextField fx:id="smtpPortField" GridPane.columnIndex="1" GridPane.rowIndex="1" styleClass="settings-input"/>  <Label text="Email:" GridPane.columnIndex="0" GridPane.rowIndex="2" styleClass="settings-label"/>
+                <TextField fx:id="smtpEmailField" GridPane.columnIndex="1" GridPane.rowIndex="2" styleClass="settings-input"/>
+
+                <Label text="Password:" GridPane.columnIndex="0" GridPane.rowIndex="3" styleClass="settings-label"/>
+                <PasswordField fx:id="smtpPasswordField" GridPane.columnIndex="1" GridPane.rowIndex="3" styleClass="settings-input"/>
+
+                <Label text="Security Protocol:" GridPane.columnIndex="0" GridPane.rowIndex="4" styleClass="settings-label"/>
+                <ComboBox fx:id="securityProtocolComboBox" GridPane.columnIndex="1" GridPane.rowIndex="4" styleClass="settings-input"/>
+            </GridPane>
+        </content>
+    </TitledPane>
+
+    <TitledPane text="Network Monitoring" collapsible="false" styleClass="settings-section">
+        <content>
+            <GridPane hgap="10" vgap="5" styleClass="settings-grid">
+                <Label text="Scan Interval (seconds):" GridPane.columnIndex="0" GridPane.rowIndex="0" styleClass="settings-label"/>
+                <TextField fx:id="scanIntervalField" GridPane.columnIndex="1" GridPane.rowIndex="0" styleClass="settings-input"/>
+            </GridPane>
+        </content>
+    </TitledPane>
+
+    <TitledPane text="Database Connection" collapsible="false" styleClass="settings-section">
+        <content>
+            <GridPane hgap="10" vgap="5" styleClass="settings-grid">
+                <Label text="Database URL:" GridPane.columnIndex="0" GridPane.rowIndex="0" styleClass="settings-label"/>
+                <TextField fx:id="dbURLField" GridPane.columnIndex="1" GridPane.rowIndex="0" styleClass="settings-input"/>
+
+                <Label text="Database User:" GridPane.columnIndex="0" GridPane.rowIndex="1" styleClass="settings-label"/>
+                <TextField fx:id="dbUserField" GridPane.columnIndex="1" GridPane.rowIndex="1" styleClass="settings-input"/>
+
+                <Label text="Database Password:" GridPane.columnIndex="0" GridPane.rowIndex="2" styleClass="settings-label"/>
+                <PasswordField fx:id="dbPasswordField" GridPane.columnIndex="1" GridPane.rowIndex="2" styleClass="settings-input"/>
+            </GridPane>
+        </content>
+    </TitledPane>
+
+    <HBox alignment="CENTER_RIGHT" spacing="10" styleClass="settings-buttons">
+        <Button text="Save" onAction="#handleSave" styleClass="action-button, settings-save-button"/>
+        </HBox>
+</VBox>

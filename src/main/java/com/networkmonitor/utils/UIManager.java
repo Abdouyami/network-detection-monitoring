@@ -34,6 +34,8 @@ public class UIManager {
                 scene.getStylesheets().add(UIManager.class.getResource("/vulnerability.css").toExternalForm());
                 scene.getStylesheets().add(UIManager.class.getResource("/network-map.css").toExternalForm());
                 scene.getStylesheets().add(UIManager.class.getResource("/notification.css").toExternalForm());
+                scene.getStylesheets().add(UIManager.class.getResource("/logs.css").toExternalForm());
+                scene.getStylesheets().add(UIManager.class.getResource("/settings.css").toExternalForm());
                 
                 
                 primaryStage.setScene(scene);
@@ -53,12 +55,15 @@ public class UIManager {
     }
 
     @SuppressWarnings("CallToPrintStackTrace")
-    public static void loadView(Pane container, String fxml) {
+    public static Object loadView(Pane container, String fxml) {
         try {
-            Parent view = FXMLLoader.load(UIManager.class.getResource(fxml));
+            FXMLLoader loader = new FXMLLoader(UIManager.class.getResource(fxml));
+            Parent view = loader.load();
             container.getChildren().setAll(view);
+            return loader.getController();  // Return the controller instance
         } catch (IOException e) {
             e.printStackTrace();
+            return null;
         }
     }
 }

@@ -44,7 +44,7 @@ public class Device {
 
     @Override
     public String toString() {
-        return String.format("Device{hostname='%s', ip='%s', status='%s'}", 
+        return String.format("Device{hostname='%s', ip='%s', status='%s'}",
             getHostname(), getIp(), getStatus());
     }
 }

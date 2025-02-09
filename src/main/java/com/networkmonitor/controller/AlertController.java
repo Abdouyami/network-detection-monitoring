@@ -1,10 +1,16 @@
 package com.networkmonitor.controller;
 
+import java.util.List;
+
 import com.networkmonitor.model.Alert;
+import com.networkmonitor.model.Device;
+import com.networkmonitor.service.NotificationService;
+import com.networkmonitor.utils.FakeDataGenerator;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
@@ -27,27 +33,51 @@ public class AlertController {
     private TableColumn<Alert, String> colTimestamp;
 
     private ObservableList<Alert> alerts;
+    private NotificationService notificationService;
+
+    public void setNotificationService(NotificationService notificationService) {
+        this.notificationService = notificationService;
+    }
 
     @FXML
     public void initialize() {
+        // You can now use notificationService here
+        if (notificationService != null) {
+            System.out.println("NotificationService injected successfully!");
+        }
         // Bind columns to Alert properties
         colType.setCellValueFactory(new PropertyValueFactory<>("type"));
         colSeverity.setCellValueFactory(new PropertyValueFactory<>("severity"));
         colTimestamp.setCellValueFactory(new PropertyValueFactory<>("timestamp"));
 
-        // Load example alerts
+        // Set up severity column colors
+        colSeverity.setCellFactory(column -> new TableCell<Alert, String>() {
+            @Override
+            protected void updateItem(String item, boolean empty) {
+                super.updateItem(item, empty);
+                if (empty || item == null) {
+                    setText(null);
+                    setStyle("");
+                } else {
+                    setText(item);
+                    switch (item.toLowerCase()) {
+                        case "high" -> setStyle("-fx-text-fill: red;");
+                        case "medium" -> setStyle("-fx-text-fill: orange;");
+                        case "low" -> setStyle("-fx-text-fill: green;");
+                        default -> setStyle("");
+                    }
+                }
+            }
+        });
+
+        // Load fake alerts
         loadAlerts();
     }
 
     private void loadAlerts() {
-        // Example alerts (replace with real data from services)
-        alerts = FXCollections.observableArrayList(
-            new Alert("DHCP Spoofing", "High", "2025-02-07 14:30:00"),
-            new Alert("Unauthorized Device", "Medium", "2025-02-07 14:35:00"),
-            new Alert("Port Scan Detected", "Low", "2025-02-07 14:40:00")
-        );
-
-        // Populate the table with example alerts
+        // Generate fake devices and alerts
+        List<Device> fakeDevices = FakeDataGenerator.generateDevices(20);
+        alerts = FXCollections.observableArrayList(FakeDataGenerator.generateAlerts(fakeDevices, 20));
         tblAlerts.setItems(alerts);
     }
 
@@ -77,7 +107,23 @@ public class AlertController {
         Alert selectedAlert = tblAlerts.getSelectionModel().getSelectedItem();
         if (selectedAlert != null) {
             System.out.println("Acknowledging alert: " + selectedAlert.getType());
-            // TODO: Implement acknowledge logic (e.g., mark alert as resolved in the database)
+
+            // Send a notification if the NotificationService is available
+            if (notificationService != null) {
+                String recipient = "belhamiciabderrahmane@gmail.com"; // Replace with actual recipient
+                String subject = "Alert Acknowledged: " + selectedAlert.getType();
+                String body = """
+                              The following alert has been acknowledged:
+                              
+                              Type: """ + selectedAlert.getType() + "\n" +
+                             "Severity: " + selectedAlert.getSeverity() + "\n" +
+                             "Timestamp: " + selectedAlert.getTimestamp();
+
+                notificationService.sendEmail(recipient, subject, body);
+                System.out.println("Notification sent for acknowledged alert.");
+            } else {
+                System.err.println("Notification service is not configured.");
+            }
         }
     }
 

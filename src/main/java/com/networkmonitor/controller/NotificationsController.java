@@ -3,10 +3,14 @@ package com.networkmonitor.controller;
 import java.net.URL;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.List;
 import java.util.ResourceBundle;
 
 import com.networkmonitor.model.Alert;
+import com.networkmonitor.model.Device;
 import com.networkmonitor.model.Notification;
+import com.networkmonitor.model.User;
+import com.networkmonitor.utils.FakeDataGenerator;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -96,8 +100,28 @@ public class NotificationsController implements Initializable {
             }
         });
 
+        // Set up status column colors
+        colStatus.setCellFactory(column -> new TableCell<Notification, String>() {
+            @Override
+            protected void updateItem(String item, boolean empty) {
+                super.updateItem(item, empty);
+                if (empty || item == null) {
+                    setText(null);
+                    setStyle("");
+                } else {
+                    setText(item);
+                    switch (item.toLowerCase()) {
+                        case "pending" -> setStyle("-fx-text-fill: orange;");
+                        case "sent" -> setStyle("-fx-text-fill: green;");
+                        default -> setStyle("");
+                    }
+                }
+            }
+        });
+
         // Initialize filter options
-        cmbFilter.getItems().addAll("All", "Read", "Unread", "Sent", "Pending");
+        //"All", "Read", "Unread",
+        cmbFilter.getItems().addAll( "All","Sent", "Pending");
         cmbFilter.setValue("All");
 
         // Initialize notifications list
@@ -113,38 +137,14 @@ public class NotificationsController implements Initializable {
     }
 
     private void loadNotifications() {
-        // Sample alerts
-        ObservableList<Alert> alerts = FXCollections.observableArrayList(
-            new Alert("DHCP Spoofing", "High", "2025-02-07 14:30:00"),
-            new Alert("Unauthorized Device", "Medium", "2025-02-07 14:35:00"),
-            new Alert("Port Scan Detected", "Low", "2025-02-07 14:40:00")
-        );
+        // Generate fake data
+        List<Device> fakeDevices = FakeDataGenerator.generateDevices(20);
+        List<Alert> fakeAlerts = FakeDataGenerator.generateAlerts(fakeDevices, 20);
+        List<User> fakeUsers = FakeDataGenerator.generateUsers(5);
+        List<Notification> fakeNotifications = FakeDataGenerator.generateNotifications(fakeAlerts, fakeUsers, 20);
 
-        // Create notifications for each alert
-        for (Alert alert : alerts) {
-            String message = generateMessageForAlert(alert);
-            notifications.add(new Notification(
-                notifications.size() + 1,
-                alert,
-                message,
-                LocalDateTime.now(),
-                "pending",
-                false
-            ));
-        }
-    }
-
-    private String generateMessageForAlert(Alert alert) {
-        return switch (alert.getType()) {
-            case "DHCP Spoofing" -> 
-                "Potential DHCP spoofing attack detected. Risk of unauthorized network access.";
-            case "Unauthorized Device" -> 
-                "New device detected on network. MAC address not in authorized list.";
-            case "Port Scan Detected" -> 
-                "Suspicious port scanning activity detected. Possible reconnaissance attempt.";
-            default -> 
-                "Alert: " + alert.getType();
-        };
+        // Add fake notifications to the observable list
+        notifications.addAll(fakeNotifications);
     }
 
     @FXML

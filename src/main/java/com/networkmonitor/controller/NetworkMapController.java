@@ -1,12 +1,12 @@
 package com.networkmonitor.controller;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import com.networkmonitor.model.Device;
+import com.networkmonitor.utils.FakeDataGenerator;
 
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.CheckBox;
@@ -32,7 +32,8 @@ public class NetworkMapController {
     @FXML private CheckBox chkInactive;
 
     private final Map<String, ImageView> deviceIcons = new HashMap<>();
-    private final ObservableList<Device> devices = FXCollections.observableArrayList();
+    // private final ObservableList<Device> devices = FXCollections.observableArrayList();
+    List<Device> devices;
     private final double ICON_SIZE = 40.0;
     private double dragStartX, dragStartY;
     private final Scale scaleTransform = new Scale(1, 1);
@@ -45,12 +46,13 @@ public class NetworkMapController {
     }
 
     private void setupInitialDevices() {
-        devices.addAll(
-            new Device("192.168.1.1", "00:1A:2B:3C:4D:5E", "Router-1", "Active"),
-            new Device("192.168.1.2", "00:1A:2B:3C:4D:5A", "Router-2", "Inactive"),
-            new Device("192.168.1.3", "00:1A:2B:3C:4D:5F", "PC-01", "Active"),
-            new Device("192.168.1.4", "00:1A:2B:3C:4D:60", "PC-02", "Suspicious")
-        );
+        // devices.addAll(
+        //     new Device("192.168.1.1", "00:1A:2B:3C:4D:5E", "Router-1", "Active"),
+        //     new Device("192.168.1.2", "00:1A:2B:3C:4D:5A", "Router-2", "Inactive"),
+        //     new Device("192.168.1.3", "00:1A:2B:3C:4D:5F", "PC-01", "Active"),
+        //     new Device("192.168.1.4", "00:1A:2B:3C:4D:60", "PC-02", "Suspicious")
+        // );
+        devices = FakeDataGenerator.generateDevices(20);
     }
 
     private void setupMapControls() {
@@ -95,22 +97,31 @@ public class NetworkMapController {
     }
 
     private void addDeviceToMap(Device device) {
-        double x = 100 + (deviceIcons.size() * 150);
-        double y = 100;
-        if (x > 800) {
-            x = 100;
-            y += 150;
-        }
-        createDeviceIcon(device, x, y);
-
-        // Create Label with MAC and Hostname
-        Label Infolabel = new Label(device.getHostname() + "\n" + device.getMac());
-        Infolabel.setTextFill(Color.WHITE); // Set text color
-        Infolabel.setStyle("-fx-font-size: 12px; -fx-font-weight: bold;"); // Font styling
-        Infolabel.setLayoutX(x);
-        Infolabel.setLayoutY(y + ICON_SIZE + 5); // Position below the icon
+        // Calculate number of devices per row (you can adjust this value)
+        final int DEVICES_PER_ROW = 5;
+        final double HORIZONTAL_SPACING = 150; // Space between devices horizontally
+        final double VERTICAL_SPACING = 150;   // Space between rows
+        final double START_X = 100;            // Starting X position
+        final double START_Y = 100;            // Starting Y position
     
-        mapCanvas.getChildren().add(Infolabel);
+        int deviceIndex = deviceIcons.size();
+        int row = deviceIndex / DEVICES_PER_ROW;
+        int col = deviceIndex % DEVICES_PER_ROW;
+    
+        double x = START_X + (col * HORIZONTAL_SPACING);
+        double y = START_Y + (row * VERTICAL_SPACING);
+    
+        // Create device icon
+        createDeviceIcon(device, x, y);
+    
+        // Create Label with MAC and Hostname
+        Label infoLabel = new Label(device.getHostname() + "\n" + device.getMac());
+        infoLabel.setTextFill(Color.WHITE);
+        infoLabel.setStyle("-fx-font-size: 12px; -fx-font-weight: bold;");
+        infoLabel.setLayoutX(x);
+        infoLabel.setLayoutY(y + ICON_SIZE + 5);
+    
+        mapCanvas.getChildren().add(infoLabel);
     }
 
     @FXML
