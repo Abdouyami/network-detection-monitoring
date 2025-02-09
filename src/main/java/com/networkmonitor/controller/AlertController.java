@@ -37,6 +37,7 @@ public class AlertController {
 
     public void setNotificationService(NotificationService notificationService) {
         this.notificationService = notificationService;
+        System.out.println("NotificationService set in AlertController");
     }
 
     @FXML
@@ -107,22 +108,31 @@ public class AlertController {
         Alert selectedAlert = tblAlerts.getSelectionModel().getSelectedItem();
         if (selectedAlert != null) {
             System.out.println("Acknowledging alert: " + selectedAlert.getType());
-
-            // Send a notification if the NotificationService is available
+            
+            // Send email notification if NotificationService is configured
             if (notificationService != null) {
-                String recipient = "belhamiciabderrahmane@gmail.com"; // Replace with actual recipient
                 String subject = "Alert Acknowledged: " + selectedAlert.getType();
-                String body = """
-                              The following alert has been acknowledged:
-                              
-                              Type: """ + selectedAlert.getType() + "\n" +
-                             "Severity: " + selectedAlert.getSeverity() + "\n" +
-                             "Timestamp: " + selectedAlert.getTimestamp();
-
-                notificationService.sendEmail(recipient, subject, body);
-                System.out.println("Notification sent for acknowledged alert.");
+                String body = String.format("""
+                    Alert Details:
+                    Type: %s
+                    Severity: %s
+                    Timestamp: %s
+                    
+                    This alert has been acknowledged in the system.
+                    """, 
+                    selectedAlert.getType(),
+                    selectedAlert.getSeverity(),
+                    selectedAlert.getTimestamp()
+                );
+                
+                // Use the same email as configured in SMTP settings
+                notificationService.sendEmail(
+                    System.getProperty("smtp.Email"), // Get the email from saved settings
+                    subject,
+                    body
+                );
             } else {
-                System.err.println("Notification service is not configured.");
+                System.out.println("Warning: NotificationService not configured. Please check email settings.");
             }
         }
     }

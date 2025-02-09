@@ -16,8 +16,9 @@
                 <TextField fx:id="smtpHostField" GridPane.columnIndex="1" GridPane.rowIndex="0" styleClass="settings-input"/>
 
                 <Label text="SMTP Port:" GridPane.columnIndex="0" GridPane.rowIndex="1" styleClass="settings-label"/>
-                <TextField fx:id="smtpPortField" GridPane.columnIndex="1" GridPane.rowIndex="1" styleClass="settings-input"/>  <Label text="Email:" GridPane.columnIndex="0" GridPane.rowIndex="2" styleClass="settings-label"/>
-                <TextField fx:id="smtpEmailField" GridPane.columnIndex="1" GridPane.rowIndex="2" styleClass="settings-input"/>
+                <TextField fx:id="smtpPortField" GridPane.columnIndex="1" GridPane.rowIndex="1" styleClass="settings-input"/>  
+                <Label text="Username:" GridPane.columnIndex="0" GridPane.rowIndex="2" styleClass="settings-label"/>
+                <TextField fx:id="smtpUsernameField" GridPane.columnIndex="1" GridPane.rowIndex="2" styleClass="settings-input"/>
 
                 <Label text="Password:" GridPane.columnIndex="0" GridPane.rowIndex="3" styleClass="settings-label"/>
                 <PasswordField fx:id="smtpPasswordField" GridPane.columnIndex="1" GridPane.rowIndex="3" styleClass="settings-input"/>

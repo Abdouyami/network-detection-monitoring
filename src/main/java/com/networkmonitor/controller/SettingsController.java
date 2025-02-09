@@ -12,7 +12,7 @@ public class SettingsController {
 
     @FXML private TextField smtpHostField;
     @FXML private TextField smtpPortField;
-    @FXML private TextField smtpEmailField;
+    @FXML private TextField smtpUsernameField;
     @FXML private PasswordField smtpPasswordField;
     @FXML private ComboBox<String> securityProtocolComboBox;
     @FXML private TextField scanIntervalField;
@@ -21,9 +21,10 @@ public class SettingsController {
     @FXML private PasswordField dbPasswordField;
 
     private NotificationService notificationService;
+    private MainController mainController;  
 
-    public NotificationService getNotificationService() {
-        return notificationService;
+    public void setMainController(MainController mainController) {
+        this.mainController = mainController;
     }
 
     @FXML
@@ -36,7 +37,7 @@ public class SettingsController {
         // Example: Replace with your actual settings loading logic
         smtpHostField.setText(loadSetting("smtp.host", "smtp.example.com")); // Default values
         smtpPortField.setText(loadSetting("smtp.port", "587"));
-        smtpEmailField.setText(loadSetting("smtp.Email", "your.email@example.com"));
+        smtpUsernameField.setText(loadSetting("smtp.Username", "your.email@example.com"));
         smtpPasswordField.setText(loadSetting("smtp.password", "yourpassword"));
         securityProtocolComboBox.setValue(loadSetting("smtp.security", "None")); // Default "None"
 
@@ -66,26 +67,43 @@ public class SettingsController {
 
     @FXML
     private void handleSave() {
-        // Save settings to configuration (e.g., properties file, database)
+        // Save settings to configuration
         saveSettings();
 
         // Initialize NotificationService with the saved settings
         String smtpHost = smtpHostField.getText();
         String smtpPort = smtpPortField.getText();
-        String smtpEmail = smtpEmailField.getText();
+        String smtpEmail = smtpUsernameField.getText();
         String smtpPassword = smtpPasswordField.getText();
         String securityProtocol = securityProtocolComboBox.getValue();
 
-        notificationService = new NotificationService(smtpHost, smtpPort, smtpEmail, smtpPassword, securityProtocol);
+        // Debugging: Log the SMTP settings being used
+        System.out.println("Initializing NotificationService with the following settings:");
+        System.out.println("SMTP Host: " + smtpHost);
+        System.out.println("SMTP Port: " + smtpPort);
+        System.out.println("SMTP Email: " + smtpEmail);
+        System.out.println("Security Protocol: " + securityProtocol);
 
-        System.out.println("Settings saved and NotificationService initialized!");
+        // Create new NotificationService instance
+        notificationService = new NotificationService(
+            smtpHost,
+            smtpPort,
+            smtpEmail,
+            smtpPassword,
+            securityProtocol
+        );
+        
+        // Update the NotificationService in MainController
+        if (mainController != null) {
+            mainController.setNotificationService(notificationService);
+        }
     }
 
     private void saveSettings() {
         // Example: Replace with your actual settings storage logic
         saveSetting("smtp.host", smtpHostField.getText());
         saveSetting("smtp.port", smtpPortField.getText());
-        saveSetting("smtp.Email", smtpEmailField.getText());
+        saveSetting("smtp.Email", smtpUsernameField.getText());
         saveSetting("smtp.password", smtpPasswordField.getText());
         saveSetting("smtp.security", securityProtocolComboBox.getValue());
         saveSetting("scan.interval", scanIntervalField.getText());
