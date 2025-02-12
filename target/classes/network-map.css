@@ -1,4 +1,4 @@
-/* Base Styles */
+* Base Styles */
 .root {
     -fx-base: #0A192F;
     -fx-accent: #64FFDA;
@@ -123,6 +123,52 @@
     -fx-font-size: 12px;
 }
 
+/* New styles for device type labels */
+.device-type-label {
+    -fx-font-size: 13px;
+    -fx-text-fill: #64FFDA;
+    -fx-font-weight: bold;
+}
+
+/* Specific colors for status labels */
+.legend-label-active {
+    -fx-text-fill: #00FF00;
+    /* Bright green */
+}
+
+.legend-label-inactive {
+    -fx-text-fill: #FFA500;
+    /* Orange */
+}
+
+.legend-label-suspicious {
+    -fx-text-fill: #FF0000;
+    /* Red */
+}
+
+/* Style for the grid containing icons and labels */
+.legend-grid {
+    -fx-alignment: center-left;
+    -fx-padding: 0 0 0 25;
+    /* Add left padding for indentation */
+}
+
+/* Specific colors for status labels */
+.legend-label-active {
+    -fx-text-fill: #00FF00;
+    /* Bright green */
+}
+
+.legend-label-inactive {
+    -fx-text-fill: #FFA500;
+    /* Orange */
+}
+
+.legend-label-suspicious {
+    -fx-text-fill: #FF0000;
+    /* Red */
+}
+
 /* Map Container */
 .map-container {
     -fx-background-color: #0A192F;
@@ -139,19 +185,6 @@
 
 .map-canvas {
     -fx-background-color: rgba(13, 28, 48, 0.6);
-}
-
-/* Status Bar */
-.status-container {
-    -fx-padding: 8;
-    -fx-background-color: #1E2D3D;
-    -fx-border-color: #2A3D4D;
-    -fx-border-width: 1 0 0 0;
-}
-
-.status-label {
-    -fx-text-fill: #8892B0;
-    -fx-font-size: 12px;
 }
 
 /* Tooltips */

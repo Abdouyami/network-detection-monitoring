@@ -6,11 +6,9 @@ import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.ResourceBundle;
 
-import com.networkmonitor.model.Alert;
-import com.networkmonitor.model.Device;
+import com.networkmonitor.config.APIConfig;
 import com.networkmonitor.model.Notification;
-import com.networkmonitor.model.User;
-import com.networkmonitor.utils.FakeDataGenerator;
+import com.networkmonitor.utils.HttpClient;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -29,6 +27,7 @@ public class NotificationsController implements Initializable {
     @FXML private TableView<Notification> tblNotifications;
     @FXML private TableColumn<Notification, String> colAlertType;
     @FXML private TableColumn<Notification, String> colSeverity;
+    @FXML private TableColumn<Notification, String> colUsername;
     @FXML private TableColumn<Notification, String> colMessage;
     @FXML private TableColumn<Notification, LocalDateTime> colTimestamp;
     @FXML private TableColumn<Notification, String> colStatus;
@@ -40,18 +39,13 @@ public class NotificationsController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         // Initialize table columns
-        colAlertType.setCellValueFactory(cellData -> 
-            cellData.getValue().getAlert().typeProperty());
-        colSeverity.setCellValueFactory(cellData -> 
-            cellData.getValue().getAlert().severityProperty());
-        colMessage.setCellValueFactory(cellData -> 
-            cellData.getValue().messageProperty());
-        colTimestamp.setCellValueFactory(cellData -> 
-            cellData.getValue().timestampProperty());
-        colStatus.setCellValueFactory(cellData -> 
-            cellData.getValue().statusProperty());
-        colRead.setCellValueFactory(cellData -> 
-            cellData.getValue().isReadProperty());
+        colAlertType.setCellValueFactory(cellData -> cellData.getValue().alertTypeProperty());
+        colSeverity.setCellValueFactory(cellData -> cellData.getValue().alertSeverityProperty());
+        colUsername.setCellValueFactory(cellData -> cellData.getValue().usernameProperty());
+        colMessage.setCellValueFactory(cellData -> cellData.getValue().messageProperty());
+        colTimestamp.setCellValueFactory(cellData -> cellData.getValue().timestampProperty());
+        colStatus.setCellValueFactory(cellData -> cellData.getValue().statusProperty());
+        colRead.setCellValueFactory(cellData -> cellData.getValue().isReadProperty());
 
         // Format timestamp column
         colTimestamp.setCellFactory(column -> new TableCell<Notification, LocalDateTime>() {
@@ -120,8 +114,7 @@ public class NotificationsController implements Initializable {
         });
 
         // Initialize filter options
-        //"All", "Read", "Unread",
-        cmbFilter.getItems().addAll( "All","Sent", "Pending");
+        cmbFilter.getItems().addAll("All", "Sent", "Pending");
         cmbFilter.setValue("All");
 
         // Initialize notifications list
@@ -137,14 +130,17 @@ public class NotificationsController implements Initializable {
     }
 
     private void loadNotifications() {
-        // Generate fake data
-        List<Device> fakeDevices = FakeDataGenerator.generateDevices(20);
-        List<Alert> fakeAlerts = FakeDataGenerator.generateAlerts(fakeDevices, 20);
-        List<User> fakeUsers = FakeDataGenerator.generateUsers(5);
-        List<Notification> fakeNotifications = FakeDataGenerator.generateNotifications(fakeAlerts, fakeUsers, 20);
-
-        // Add fake notifications to the observable list
-        notifications.addAll(fakeNotifications);
+        // Fetch real data from the API
+        String url = APIConfig.NOTIFICATIONS_URL; // Use the base notifications URL
+        String response = HttpClient.get(url); // Fetch data from the API
+    
+        if (response != null) {
+            // System.err.println("Fetched notifications from the API: " + response);
+            List<Notification> realNotifications = Notification.parseFromJson(response);
+            notifications.addAll(realNotifications);
+        } else {
+            System.err.println("Failed to fetch notifications from the API.");
+        }
     }
 
     @FXML
@@ -155,12 +151,11 @@ public class NotificationsController implements Initializable {
         filteredNotifications.setPredicate(notification -> {
             boolean matchesSearch = 
                 notification.getMessage().toLowerCase().contains(searchText) ||
-                notification.getAlert().getType().toLowerCase().contains(searchText) ||
-                notification.getAlert().getSeverity().toLowerCase().contains(searchText);
+                notification.getAlertType().toLowerCase().contains(searchText) ||
+                notification.getAlertSeverity().toLowerCase().contains(searchText) ||
+                notification.getUsername().toLowerCase().contains(searchText);
             
             boolean matchesFilter = switch (filter) {
-                case "Read" -> notification.isRead();
-                case "Unread" -> !notification.isRead();
                 case "Sent" -> notification.getStatus().equals("sent");
                 case "Pending" -> notification.getStatus().equals("pending");
                 default -> true;

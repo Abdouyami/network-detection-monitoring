@@ -51,6 +51,10 @@
                         text="Timestamp" 
                         prefWidth="150" 
                         styleClass="column-header"/>
+            <TableColumn fx:id="colUsername" 
+                        text="User Name" 
+                        prefWidth="100" 
+                        styleClass="column-header"/>
             <TableColumn fx:id="colStatus" 
                         text="Status" 
                         prefWidth="100" 

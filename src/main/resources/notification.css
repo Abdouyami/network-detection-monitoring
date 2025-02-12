@@ -22,7 +22,7 @@
 .filter-combo {
     -fx-pref-width: 150px;
     -fx-background-color: rgba(100, 255, 218, 0.1);
-    -fx-text-fill: #E6F1FF;
+    -fx-text-fill: #64FFDA;
     -fx-border-color: #64FFDA;
     -fx-border-radius: 5;
 }
@@ -47,7 +47,7 @@
 }
 
 .notification-table .column-header-background {
-    -fx-background-color: rgba(100, 255, 218, 0.1);
+    -fx-background-color: rgba(16, 180, 142, 0.1);
 }
 
 .notification-table .column-header {
@@ -57,7 +57,7 @@
     -fx-padding: 10 15;
 }
 
-.notification-table.column-header .label {
+.notification-table .column-header .label {
     -fx-text-fill: #64FFDA;
     -fx-font-size: 14px;
     -fx-font-weight: bold;
@@ -72,6 +72,7 @@
 
 .notification-table .table-row-cell {
     -fx-background-color: rgba(13, 28, 48, 0.9);
+    fx-border-width: 0;
     -fx-text-fill: #E6F1FF;
 }
 

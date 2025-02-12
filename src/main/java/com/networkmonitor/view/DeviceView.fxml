@@ -24,8 +24,9 @@
             <TableColumn fx:id="colIpAddress" text="IP Address" prefWidth="200" styleClass="column-header"/>
             <TableColumn fx:id="colMacAddress" text="MAC Address" prefWidth="200" styleClass="column-header"/>
             <TableColumn fx:id="colHostname" text="Hostname" prefWidth="200" styleClass="column-header"/>
+            <TableColumn fx:id="colOS" text="Operating System" prefWidth="150" styleClass="column-header"/> 
             <TableColumn fx:id="colStatus" text="Status" prefWidth="150" styleClass="column-header"/>
-        </columns>
+            </columns>
         <columnResizePolicy>
             <TableView fx:constant="CONSTRAINED_RESIZE_POLICY"/>
         </columnResizePolicy>

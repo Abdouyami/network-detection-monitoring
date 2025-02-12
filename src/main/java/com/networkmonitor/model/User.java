@@ -12,7 +12,13 @@ public class User {
         this.email = email;
         this.role = role;
     }
-
+    
+    public User(String username, String email, String role) {
+        this.username = username;
+        this.email = email;
+        this.role = role;
+        this.password = ""; // Default value for password, or null if you prefer
+    }
     // Getters
     public String getUsername() { return username; }
     public String getPassword() { return password; }

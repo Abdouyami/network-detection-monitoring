@@ -43,7 +43,7 @@ public class SettingsController {
 
         scanIntervalField.setText(loadSetting("scan.interval", "60"));
 
-        dbURLField.setText(loadSetting("db.url", "jdbc:mysql://localhost:3306/network_monitor"));
+        dbURLField.setText(loadSetting("db.url", "jdbc:mariadb://localhost:3306/network_monitor"));
         dbUserField.setText(loadSetting("db.user", "dbuser"));
         dbPasswordField.setText(loadSetting("db.password", "dbpassword"));
 

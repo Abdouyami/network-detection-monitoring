@@ -36,7 +36,7 @@ public class UIManager {
                 scene.getStylesheets().add(UIManager.class.getResource("/notification.css").toExternalForm());
                 scene.getStylesheets().add(UIManager.class.getResource("/logs.css").toExternalForm());
                 scene.getStylesheets().add(UIManager.class.getResource("/settings.css").toExternalForm());
-                
+                scene.getStylesheets().add(UIManager.class.getResource("/traffic.css").toExternalForm());
                 
                 primaryStage.setScene(scene);
                 primaryStage.setTitle("Network Admin Panel");

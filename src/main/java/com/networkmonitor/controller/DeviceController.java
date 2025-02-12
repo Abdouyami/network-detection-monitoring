@@ -1,12 +1,15 @@
 package com.networkmonitor.controller;
 
+import java.util.List;
+
+import com.networkmonitor.config.APIConfig;
 import com.networkmonitor.model.Device;
-import com.networkmonitor.utils.FakeDataGenerator;
+import com.networkmonitor.utils.HttpClient;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
-import javafx.fxml.FXML; // Import FilteredList
+import javafx.fxml.FXML;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -14,26 +17,16 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 
 public class DeviceController {
-    @FXML
-    private TextField txtSearch;
-
-    @FXML
-    private TableView<Device> tblDevices;
-
-    @FXML
-    private TableColumn<Device, String> colIpAddress;
-
-    @FXML
-    private TableColumn<Device, String> colMacAddress;
-
-    @FXML
-    private TableColumn<Device, String> colHostname;
-
-    @FXML
-    private TableColumn<Device, String> colStatus;
+    @FXML private TextField txtSearch;
+    @FXML private TableView<Device> tblDevices;
+    @FXML private TableColumn<Device, String> colIpAddress;
+    @FXML private TableColumn<Device, String> colMacAddress;
+    @FXML private TableColumn<Device, String> colHostname;
+    @FXML private TableColumn<Device, String> colStatus;
+    @FXML private TableColumn<Device, String> colOS;
 
     private ObservableList<Device> devices;
-    private FilteredList<Device> filteredDevices; // Add FilteredList
+    private FilteredList<Device> filteredDevices;
 
     @FXML
     public void initialize() {
@@ -42,8 +35,9 @@ public class DeviceController {
         colMacAddress.setCellValueFactory(new PropertyValueFactory<>("macAddress"));
         colHostname.setCellValueFactory(new PropertyValueFactory<>("hostname"));
         colStatus.setCellValueFactory(new PropertyValueFactory<>("status"));
+        colOS.setCellValueFactory(new PropertyValueFactory<>("os"));
 
-        // Set up severity column colors
+        // Set up status column colors
         colStatus.setCellFactory(column -> new TableCell<Device, String>() {
             @Override
             protected void updateItem(String item, boolean empty) {
@@ -63,22 +57,31 @@ public class DeviceController {
             }
         });
 
-        // Load fake devices and set up filtering
+        // Load devices from the API
         loadDevices();
     }
 
     private void loadDevices() {
-        // Generate fake devices
-        devices = FXCollections.observableArrayList(FakeDataGenerator.generateDevices(20));
+        // Fetch real data from the API
+        String url = APIConfig.DEVICES_URL; // Use the base devices URL
+        String response = HttpClient.get(url); // Fetch data from the API
 
-        // Initialize FilteredList
-        filteredDevices = new FilteredList<>(devices);
-        tblDevices.setItems(filteredDevices); // Set FilteredList to the table
+        if (response != null) {
+            System.err.println("Fetched devices from the API: " + response);
+            List<Device> realDevices = Device.parseFromJson(response);
+            devices = FXCollections.observableArrayList(realDevices);
 
-        // Add listener to the search text field
-        txtSearch.textProperty().addListener((observable, oldValue, newValue) -> {
-            filterDevices(newValue); // Call filter method
-        });
+            // Initialize FilteredList
+            filteredDevices = new FilteredList<>(devices);
+            tblDevices.setItems(filteredDevices);
+
+            // Add listener to the search text field
+            txtSearch.textProperty().addListener((observable, oldValue, newValue) -> {
+                filterDevices(newValue); // Call filter method
+            });
+        } else {
+            System.err.println("Failed to fetch devices from the API.");
+        }
     }
 
     private void filterDevices(String searchText) {
@@ -88,9 +91,9 @@ public class DeviceController {
             String lowerCaseSearchText = searchText.toLowerCase();
             filteredDevices.setPredicate(device ->
                     device.getIp().toLowerCase().contains(lowerCaseSearchText) ||
-                            device.getHostname().toLowerCase().contains(lowerCaseSearchText) ||
-                            device.getMac().toLowerCase().contains(lowerCaseSearchText) ||
-                            device.getStatus().toLowerCase().contains(lowerCaseSearchText)
+                    device.getHostname().toLowerCase().contains(lowerCaseSearchText) ||
+                    device.getMac().toLowerCase().contains(lowerCaseSearchText) ||
+                    device.getStatus().toLowerCase().contains(lowerCaseSearchText)
             );
         }
     }

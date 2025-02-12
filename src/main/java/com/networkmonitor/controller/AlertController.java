@@ -2,10 +2,10 @@ package com.networkmonitor.controller;
 
 import java.util.List;
 
+import com.networkmonitor.config.APIConfig;
 import com.networkmonitor.model.Alert;
-import com.networkmonitor.model.Device;
 import com.networkmonitor.service.NotificationService;
-import com.networkmonitor.utils.FakeDataGenerator;
+import com.networkmonitor.utils.HttpClient;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -31,6 +31,8 @@ public class AlertController {
 
     @FXML
     private TableColumn<Alert, String> colTimestamp;
+    @FXML TableColumn<Alert, String> colDeviceHostname;
+    @FXML TableColumn<Alert, String> colDeviceOs;
 
     private ObservableList<Alert> alerts;
     private NotificationService notificationService;
@@ -50,6 +52,8 @@ public class AlertController {
         colType.setCellValueFactory(new PropertyValueFactory<>("type"));
         colSeverity.setCellValueFactory(new PropertyValueFactory<>("severity"));
         colTimestamp.setCellValueFactory(new PropertyValueFactory<>("timestamp"));
+        colDeviceHostname.setCellValueFactory(new PropertyValueFactory<>("deviceHostname"));
+        colDeviceOs.setCellValueFactory(new PropertyValueFactory<>("deviceOs"));
 
         // Set up severity column colors
         colSeverity.setCellFactory(column -> new TableCell<Alert, String>() {
@@ -71,15 +75,26 @@ public class AlertController {
             }
         });
 
+         // Add search listener
+         txtSearch.textProperty().addListener((observable, oldValue, newValue) -> handleSearch());
+
         // Load fake alerts
         loadAlerts();
     }
 
     private void loadAlerts() {
-        // Generate fake devices and alerts
-        List<Device> fakeDevices = FakeDataGenerator.generateDevices(20);
-        alerts = FXCollections.observableArrayList(FakeDataGenerator.generateAlerts(fakeDevices, 20));
-        tblAlerts.setItems(alerts);
+        // Fetch real data from the API
+        String url = APIConfig.ALERTS_URL; // Use the base alerts URL
+        String response = HttpClient.get(url); // Fetch data from the API
+
+        if (response != null) {
+            System.err.println("Fetched alerts from the API: " + response);
+            List<Alert> realAlerts = Alert.parseFromJson(response);
+            alerts = FXCollections.observableArrayList(realAlerts);
+            tblAlerts.setItems(alerts);
+        } else {
+            System.err.println("Failed to fetch alerts from the API.");
+        }
     }
 
     @FXML

@@ -6,8 +6,9 @@ import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.ResourceBundle;
 
+import com.networkmonitor.config.APIConfig;
 import com.networkmonitor.model.Log;
-import com.networkmonitor.utils.FakeDataGenerator;
+import com.networkmonitor.utils.HttpClient;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -36,16 +37,11 @@ public class LogsController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         // Initialize table columns
-        colTimestamp.setCellValueFactory(cellData -> 
-            cellData.getValue().timestampProperty());
-        colType.setCellValueFactory(cellData -> 
-            cellData.getValue().typeProperty());
-        colMessage.setCellValueFactory(cellData -> 
-            cellData.getValue().messageProperty());
-        colUser.setCellValueFactory(cellData -> 
-            cellData.getValue().userProperty());
-        colSeverity.setCellValueFactory(cellData -> 
-            cellData.getValue().severityProperty());
+        colTimestamp.setCellValueFactory(cellData -> cellData.getValue().timestampProperty());
+        colType.setCellValueFactory(cellData -> cellData.getValue().typeProperty());
+        colMessage.setCellValueFactory(cellData -> cellData.getValue().messageProperty());
+        colUser.setCellValueFactory(cellData -> cellData.getValue().userProperty());
+        colSeverity.setCellValueFactory(cellData -> cellData.getValue().severityProperty());
 
         // Format timestamp column
         colTimestamp.setCellFactory(column -> new TableCell<Log, LocalDateTime>() {
@@ -81,8 +77,8 @@ public class LogsController implements Initializable {
             }
         });
 
-         // Set up type column colors
-         colType.setCellFactory(column -> new TableCell<Log, String>() {
+        // Set up type column colors
+        colType.setCellFactory(column -> new TableCell<Log, String>() {
             @Override
             protected void updateItem(String item, boolean empty) {
                 super.updateItem(item, empty);
@@ -113,14 +109,22 @@ public class LogsController implements Initializable {
         // Add search listener
         txtSearch.textProperty().addListener((observable, oldValue, newValue) -> applyFilter());
 
-        // Load initial data
+        // Load real logs from the API
         loadLogs();
     }
 
     private void loadLogs() {
-        // Generate fake logs
-        List<Log> fakeLogs = FakeDataGenerator.generateLogs(20);
-        logs.addAll(fakeLogs);
+        // Fetch real data from the API
+        String url = APIConfig.LOGS_URL; // Use the base logs URL
+        String response = HttpClient.get(url); // Fetch data from the API
+
+        if (response != null) {
+            System.err.println("Fetched logs from the API: " + response);
+            List<Log> realLogs = Log.parseFromJson(response);
+            logs.addAll(realLogs);
+        } else {
+            System.err.println("Failed to fetch logs from the API.");
+        }
     }
 
     @FXML

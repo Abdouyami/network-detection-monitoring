@@ -4,6 +4,8 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.shape.Circle?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.image.Image?>
 
 <SplitPane xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" 
     fx:controller="com.networkmonitor.controller.NetworkMapController" 
@@ -40,24 +42,69 @@
         <!-- Legend -->
         <VBox spacing="10" styleClass="legend-container">
             <Label text="Legend" styleClass="legend-title" />
-            <GridPane hgap="10" vgap="5">
-                <Circle radius="6" fill="green" GridPane.columnIndex="0" GridPane.rowIndex="0" />
-                <Label text="Active" styleClass="legend-label" GridPane.columnIndex="1" GridPane.rowIndex="0" />
-                
-                <Circle radius="6" fill="red" GridPane.columnIndex="0" GridPane.rowIndex="1" />
-                <Label text="Suspicious" styleClass="legend-label" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                
-                <Circle radius="6" fill="gray" GridPane.columnIndex="0" GridPane.rowIndex="2" />
-                <Label text="Inactive" styleClass="legend-label" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-            </GridPane>
+
+            <!-- Router Section -->
+            <VBox spacing="5">
+                <Label text="Router:" styleClass="device-type-label" />
+                <GridPane hgap="10" vgap="5">
+                    <padding>
+                        <Insets left="25"/>
+                    </padding>
+                    <ImageView fitHeight="20" fitWidth="20" GridPane.columnIndex="0" GridPane.rowIndex="0">
+                        <image>
+                            <Image url="@/device-icons/router_active.png" />
+                        </image>
+                    </ImageView>
+                    <Label text="Active" styleClass="legend-label, legend-label-active" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+
+                    <ImageView fitHeight="20" fitWidth="20" GridPane.columnIndex="0" GridPane.rowIndex="1">
+                        <image>
+                            <Image url="@/device-icons/router_inactive.png" />
+                        </image>
+                    </ImageView>
+                    <Label text="Inactive" styleClass="legend-label, legend-label-inactive" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+
+                    <ImageView fitHeight="20" fitWidth="20" GridPane.columnIndex="0" GridPane.rowIndex="2">
+                        <image>
+                            <Image url="@/device-icons/router_suspicious.png" />
+                        </image>
+                    </ImageView>
+                    <Label text="Suspicious" styleClass="legend-label, legend-label-suspicious" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                </GridPane>
+            </VBox>
+
+            <!-- PC Section -->
+            <VBox spacing="5">
+                <Label text="PC:" styleClass="device-type-label" />
+                <GridPane hgap="10" vgap="5">
+                    <padding>
+                        <Insets left="25"/>
+                    </padding>
+                    <ImageView fitHeight="20" fitWidth="20" GridPane.columnIndex="0" GridPane.rowIndex="0">
+                        <image>
+                            <Image url="@/device-icons/pc_active.png" />
+                        </image>
+                    </ImageView>
+                    <Label text="Active" styleClass="legend-label, legend-label-active" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+
+                    <ImageView fitHeight="20" fitWidth="20" GridPane.columnIndex="0" GridPane.rowIndex="1">
+                        <image>
+                            <Image url="@/device-icons/pc_inactive.png" />
+                        </image>
+                    </ImageView>
+                    <Label text="Inactive" styleClass="legend-label, legend-label-inactive" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+
+                    <ImageView fitHeight="20" fitWidth="20" GridPane.columnIndex="0" GridPane.rowIndex="2">
+                        <image>
+                            <Image url="@/device-icons/pc_suspicious.png" />
+                        </image>
+                    </ImageView>
+                    <Label text="Suspicious" styleClass="legend-label, legend-label-suspicious" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                </GridPane>
+            </VBox>
         </VBox>
 
         <VBox VBox.vgrow="ALWAYS" /> <!-- Spacer -->
-
-        <!-- Status Bar -->
-        <HBox styleClass="status-container">
-            <Label fx:id="lblStatus" text="Ready" styleClass="status-label" />
-        </HBox>
     </VBox>
 
     <!-- Main Area -->
@@ -69,3 +116,5 @@
     </StackPane>
 
 </SplitPane>
+
+

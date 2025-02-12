@@ -67,14 +67,22 @@
 .logs-table .table-row-cell {
     -fx-background-color: rgba(13, 28, 48, 0.9);
     -fx-border-width: 0;
+    -fx-text-fill: #E6F1FF;
 }
-
 .logs-table .table-row-cell:odd {
     -fx-background-color: rgba(10, 25, 47, 0.9);
 }
 
 .logs-table .table-row-cell:selected {
     -fx-background-color: rgba(100, 255, 218, 0.2);
+}
+
+/* Cell styling */
+.logs-table .table-cell {
+    -fx-border-width: 0;
+    -fx-padding: 10 15;
+    -fx-text-fill: #E6F1FF;
+    -fx-alignment: CENTER;
 }
 
 /* ScrollBar styling */

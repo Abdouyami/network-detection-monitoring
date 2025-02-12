@@ -1,22 +1,23 @@
 {
-    "netbeans.jdkhome": "c:\\Program Files\\Java\\jdk-23",
-    "netbeans.project.jdkhome": "c:\\Program Files\\Java\\jdk-23",
-    "java.jdt.ls.java.home": "c:\\Program Files\\Java\\jdk-23",
-    "terminal.integrated.env.windows": {
-        "JAVA_HOME": "c:\\Program Files\\Java\\jdk-23",
-        "PATH": "c:\\Program Files\\Java\\jdk-23\\bin;${env:PATH}"
+    "netbeans.jdkhome": "/usr/lib/jvm/java-23-openjdk-amd64",
+    "netbeans.project.jdkhome": "/usr/lib/jvm/java-23-openjdk-amd64",
+    "java.jdt.ls.java.home": "/usr/lib/jvm/java-23-openjdk-amd64",
+    "terminal.integrated.env.linux": {
+        "JAVA_HOME": "/usr/lib/jvm/java-23-openjdk-amd64",
+        "PATH": "/usr/lib/jvm/java-23-openjdk-amd64/bin:${env:PATH}"
     },
     "maven.terminal.customEnv": [
         {
             "environmentVariable": "JAVA_HOME",
-            "value": "c:\\Program Files\\Java\\jdk-23"
+            "value": "/usr/lib/jvm/java-23-openjdk-amd64"
         }
     ],
     "java.configuration.runtimes": [
         {
             "name": "JavaSE-23",
-            "path": "c:\\Program Files\\Java\\jdk-23"
+            "path": "/usr/lib/jvm/java-23-openjdk-amd64"
         }
     ],
-    "java.configuration.updateBuildConfiguration": "interactive"
+    "java.configuration.updateBuildConfiguration": "interactive",
+    "sqltools.connections": []
 }

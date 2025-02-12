@@ -4,8 +4,10 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import com.networkmonitor.model.User;
 import com.networkmonitor.service.NotificationService;
 import com.networkmonitor.utils.UIManager;
+import com.networkmonitor.utils.UserSession;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -29,6 +31,8 @@ public class MainController implements Initializable {
 
     @FXML
     private Button btnVulnerabilities;
+
+    @FXML private Button btnTraffic;
 
     @FXML
     private Button btnNetworkMap;
@@ -54,6 +58,15 @@ public class MainController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         // Load Dashboard by default when the app starts
         loadDashboard();
+
+        // Access user data from the singleton
+        User user = UserSession.getInstance().getUser();
+        if (user != null) {
+            System.out.println("Logged-in user: " + user.getUsername());
+            System.out.println("User role: " + user.getRole());
+        } else {
+            System.out.println("No user data found in MainController");
+        }
     }
 
     @FXML
@@ -90,6 +103,13 @@ public class MainController implements Initializable {
         resetButtonStyles();
         btnVulnerabilities.getStyleClass().add("active");
         UIManager.loadView(contentArea, "/com/networkmonitor/view/VulnerabilityView.fxml");
+    }
+
+    @FXML
+    private void loadTrafficView() {
+        resetButtonStyles();
+        btnTraffic.getStyleClass().add("active");
+        UIManager.loadView(contentArea, "/com/networkmonitor/view/TrafficView.fxml");   
     }
 
     @FXML
@@ -137,5 +157,6 @@ public class MainController implements Initializable {
         btnNotifications.getStyleClass().remove("active");
         btnLogs.getStyleClass().remove("active");
         btnSettings.getStyleClass().remove("active");
+        btnTraffic.getStyleClass().remove("active");
     }
 }

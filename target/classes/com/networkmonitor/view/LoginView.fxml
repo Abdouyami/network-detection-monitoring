@@ -29,7 +29,9 @@
                 <PasswordField fx:id="passwordField" styleClass="login-field" promptText="Enter your password"/>
             </VBox>
             
-            <Button text="Login" onAction="#handleLogin" styleClass="login-button"/>
+            <Button fx:id="loginButton" text="Login" onAction="#handleLogin" styleClass="login-button"/>
+            <!-- Add this near your login button -->
+            <ProgressIndicator fx:id="loginProgress" visible="false"/>
         </VBox>
     </VBox>
     
